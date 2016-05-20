@@ -1,31 +1,22 @@
-import {Page, NavController, Modal} from 'ionic-angular';
+import {Page, NavController, Modal, Events} from 'ionic-angular';
 import {LoginPage} from '../auth/login';
 import {Component, AfterViewInit, Inject} from '@angular/core';
+import {AuthService} from '../../services/AuthService';
 
 @Page({
   templateUrl: 'build/pages/page1/page1.html',
+  providers: [AuthService]
 })
 export class Page1 {
-  public ref = new Firebase('https://popping-inferno-7577.firebaseio.com/');
-  authInfo: any = this.ref.getAuth();
 
-  constructor(public nav: NavController) {
+  constructor(private auth: AuthService,
+              public nav: NavController,
+              public events: Events) {
     // dont do anything heavy here... do it in ngOnInit
   }
 
-  ngAfterViewInit() {
-    this.displayLoginModal();
-  }
-
-  displayLoginModal() {
-    let loginPage = Modal.create(LoginPage);
-    this.nav.present(loginPage);
-  }
-
   logout() {
-    this.authInfo = null;
-    this.ref.unauth();
-    /* Go Home */
-
+    this.auth.logout();
+    this.events.publish('user:logout');
   }
 }

@@ -1,33 +1,40 @@
-import {Page, Modal, NavController, ViewController} from 'ionic-angular';
+import {Page, Modal, NavController, ViewController, Events} from 'ionic-angular';
 import {LoginPage} from '../auth/login';
+import {AuthService} from '../../services/AuthService';
+import {TabsPage} from "../tabs/tabs";
+import {OnInit} from '@angular/core'
 
 @Page({
     templateUrl: 'build/pages/auth/login.html',
+    providers: [AuthService]
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
 
     public error: any;
-    
-    constructor(public viewCtrl: ViewController) {
+    public authInfo: any;
 
+    constructor(public nav: NavController,
+                private authService: AuthService,
+                public events: Events) {
+        this.authInfo = this.authService.getAuth();
+    }
+
+    ngOnInit() {
+        if (this.authInfo) {
+            this.events.publish('user:login');
+        }
     }
 
     login( credentials, _event) {
         _event.preventDefault();
 
-        let addUser = credentials.created;
-        credentials.created = null;
-
-        this.ref.authWithPassword({
-            email: credentials.email,
-            password: credentials.password
-        }, (error, authData) => {
-            if (error) {
-                console.log('error' , error);
+        this.authService.login(credentials, (error, data) => {
+            if(error) {
+                console.warn('error ' , error);
                 this.error = error;
             } else {
-                console.log("Login Succesful", authData);
-                this.viewCtrl.dismiss();
+                console.log('Login Succesful: ' + data.uid);
+                this.events.publish('user:login');
             }
         });
 
@@ -36,16 +43,12 @@ export class LoginPage {
     registerUser(credentials, _event) {
         _event.preventDefault();
 
-        this.ref.createUser({
-            email: credentials.email,
-            password: credentials.password
-        } , (error, authData) => {
+        this.authService.createUser(credentials, (error, data) => {
             if (error) {
-                console.log("Error creating user:", error);
+                console.warn('Error Creating User ', error);
                 this.error = error;
             } else {
-                console.log("Successfully created user account with uid:", authData.uid);
-                credentials.created = true;
+                console.log('User Created: ', data.uid);
                 this.login(credentials, _event);
             }
         });

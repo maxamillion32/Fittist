@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
+import {Events} from 'ionic-angular';
 
 @Injectable()
 export class AuthService {
     public ref = new Firebase('https://popping-inferno-7577.firebaseio.com/');
     
-    constructor() {
-        
+    constructor(public events: Events) {
     }
 
     getAuth() {
@@ -13,14 +13,22 @@ export class AuthService {
     }
 
     logout() {
-        return this.ref.unauth;
+        return this.ref.unauth();
     }
 
-    login(credentials) {
-
-    }
-
-    createUser(credentials) {
+    login(credentials, _callback) {
         
+        return this.ref.authWithPassword({
+            email: credentials.email,
+            password: credentials.password
+        }, _callback);
+
+    }
+
+    createUser(credentials, _callback) {
+        return this.ref.createUser({
+            email: credentials.email,
+            password: credentials.password
+        }, _callback);
     }
 }

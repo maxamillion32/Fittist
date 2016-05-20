@@ -1,11 +1,10 @@
-import {App, Platform, NavController} from 'ionic-angular';
+import {App, Platform, NavController, Events} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
-import {
-    FIREBASE_PROVIDERS, defaultFirebase,
-    AngularFire, firebaseAuthConfig, AuthProviders,
-    AuthMethods
-} from 'angularfire2';
+import {enableProdMode} from '@angular/core';
+import {LoginPage} from "./pages/auth/login";
+
+enableProdMode();
 
 @App({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
@@ -15,12 +14,29 @@ export class MyApp {
   
   rootPage: any = TabsPage;
 
-  constructor(platform: Platform) {
+  constructor(platform: Platform,
+              public events: Events) {
+    /* listen for login / logout event, change root page */
+
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
+    });
+
+    this.listenToLoginEvents();
+  }
+
+  listenToLoginEvents() {
+    this.events.subscribe('user:login' , () => {
+      console.log('Received Login Event');
+      this.rootPage = TabsPage;
+    });
+
+    this.events.subscribe('user:logout' , () => {
+      console.log('Received Logout Event');
+      this.rootPage = LoginPage;
     });
   }
 }

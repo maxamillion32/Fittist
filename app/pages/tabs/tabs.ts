@@ -13,5 +13,4 @@ export class TabsPage {
   tab2Root:any = Page2;
   tab3Root:any = Page3;
 
-
 }
