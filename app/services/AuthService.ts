@@ -26,6 +26,9 @@ export class AuthService {
     }
 
     createUser(credentials, _callback) {
+        /* Add user to users database */
+        this.ref.child('athletes').push({email: credentials.email});
+        
         return this.ref.createUser({
             email: credentials.email,
             password: credentials.password
