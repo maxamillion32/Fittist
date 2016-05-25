@@ -3,10 +3,11 @@ import {Workout} from '../../model/workout';
 import {MovementService} from '../../services/MovementService';
 import {ComplexService} from '../../services/ComplexService';
 import {WorkoutService} from "../../services/WorkoutService";
+import {AthleteService} from '../../services/AthleteService';
 
 @Page({
     templateUrl: 'build/pages/workout/workoutForm.html',
-    providers:[MovementService, ComplexService, WorkoutService]
+    providers:[MovementService, ComplexService, WorkoutService, AthleteService]
 })
 export class WorkoutForm {
 
@@ -16,10 +17,12 @@ export class WorkoutForm {
 
     constructor(private movements: MovementService,
                 private complex: ComplexService,
-                private workouts: WorkoutService) {
+                private workouts: WorkoutService,
+                private athletes: AthleteService) {
         // movements.bootstrap();
         // complex.bootstrap();
-        workouts.bootstrap();
+        // workouts.bootstrap();
+        athletes.bootstrap();
     }
 
     addExercise( form , _event) {

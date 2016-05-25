@@ -3,8 +3,7 @@ import {Events} from 'ionic-angular';
 
 @Injectable()
 export class ComplexService {
-    public ref = new Firebase('https://popping-inferno-7577.firebaseio.com/');
-    public complex = new Firebase('https://popping-inferno-7577.firebaseio.com/complex');
+    public complex = firebase.database().ref('complex');
 
     constructor(public events:Events) {
     }

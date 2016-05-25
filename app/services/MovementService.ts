@@ -3,8 +3,7 @@ import {Events} from 'ionic-angular';
 
 @Injectable()
 export class MovementService {
-    public ref = new Firebase('https://popping-inferno-7577.firebaseio.com/');
-    public movements = new Firebase('https://popping-inferno-7577.firebaseio.com/movements');
+    public movements = firebase.database().ref('movements');
 
     constructor(public events:Events) {
     }

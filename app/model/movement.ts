@@ -1,4 +1,4 @@
-export class movement {
+export class Movement {
     constructor(
         public name: string,
         public type: string,

@@ -3,8 +3,7 @@ import {Events} from 'ionic-angular';
 
 @Injectable()
 export class WorkoutService {
-    public ref = new Firebase('https://popping-inferno-7577.firebaseio.com/');
-    public workouts = new Firebase('https://popping-inferno-7577.firebaseio.com/workouts');
+    public workouts = firebase.database().ref('workouts');
 
     constructor(public events:Events) {
     }

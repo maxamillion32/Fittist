@@ -3,35 +3,26 @@ import {Events} from 'ionic-angular';
 
 @Injectable()
 export class AuthService {
-    public ref = new Firebase('https://popping-inferno-7577.firebaseio.com/');
+    public auth = firebase.auth();
     
     constructor(public events: Events) {
     }
 
     getAuth() {
-        return this.ref.getAuth();
+        return this.auth.currentUser;
     }
 
     logout() {
-        return this.ref.unauth();
+        return this.auth.signOut();
     }
 
-    login(credentials, _callback) {
-        
-        return this.ref.authWithPassword({
-            email: credentials.email,
-            password: credentials.password
-        }, _callback);
-
+    login(credentials) {
+        return this.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
     }
 
-    createUser(credentials, _callback) {
+    createUser(credentials) {
         /* Add user to users database */
-        this.ref.child('athletes').push({email: credentials.email});
-        
-        return this.ref.createUser({
-            email: credentials.email,
-            password: credentials.password
-        }, _callback);
+        // ref.child('athletes').push({email: credentials.email});
+        return this.auth.createUserWithEmailAndPassword(credentials.email, credentials.password);
     }
 }
