@@ -8,8 +8,6 @@ import {Workout} from './workout';
 })
 export class WorkoutList {
 	/* Takes Workout */
-	@Input()
-	workout: any;
 
 	constructor() {}
 }

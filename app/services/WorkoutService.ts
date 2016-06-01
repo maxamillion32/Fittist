@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 import {Events} from 'ionic-angular';
+import {Workout} from '../model/workout';
 
 @Injectable()
 export class WorkoutService {
-    public workouts = firebase.database().ref('workouts');
+    public workoutsRef = firebase.database().ref('workouts');
 
     constructor(public events:Events) {
     }
@@ -32,7 +34,7 @@ export class WorkoutService {
             exercises: [{movements:[movements[2]] , properties: {reps: 30, weight: 135, units:'imp'}}]
         };
 
-        this.workouts.push(grace);
+        this.workoutsRef.push(grace);
 
         let isabel = {
             name: 'Isabel',
@@ -41,7 +43,7 @@ export class WorkoutService {
             exercises: [{movements: [movements[0]] , properties: {reps: 30, weight: 135, units:'imp'}}]
         };
 
-        this.workouts.push(isabel);
+        this.workoutsRef.push(isabel);
 
         let karen = {
             name: 'Karen',
@@ -50,8 +52,39 @@ export class WorkoutService {
             exercises: [{movements: movements[7] , properties: {reps: 150, weight: 20, units:'imp'}}]
         };
 
-        this.workouts.push(karen);
+        this.workoutsRef.push(karen);
 
+    }
+
+    getAll(): Observable<Workout[]> {
+
+        /* Streams Workouts one at a time */
+        return Observable.create((observer) => {
+            let workouts: Workout[] = [];
+            let listener = this.workoutsRef.on('child_added', snapshot => {
+                let data = snapshot.val();
+                let workout = new Workout(
+                    snapshot.key,
+                    data.category,
+                    data.exercises,
+                    data.resultType,
+                    data.result,
+                    data.name
+                );
+                workouts.push(workout);
+                observer.next(workouts);
+            }, observer.error);
+
+            return () => {
+                this.workoutsRef.on('child_added', listener);
+            }
+
+        });
+
+    }
+
+    getWorkouts() {
+        return this.workouts.on('value')
     }
 
 }

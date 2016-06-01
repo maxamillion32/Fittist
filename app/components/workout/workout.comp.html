@@ -1,0 +1,40 @@
+<ion-card>
+	<ion-card-content>
+		<h2 class="card-title">
+			{{workout.name}}
+		</h2>
+		<p>
+			{{workout.description}}
+		</p>
+	</ion-card-content>
+	<ion-list>
+		<ion-item>
+			<ion-icon item-left name="moon"></ion-icon>
+			<h3>Andrew</h3>
+			<ion-note item-right>Note</ion-note>
+		</ion-item>
+		<ion-item>
+			Result 2
+		</ion-item>
+	</ion-list>
+	<ion-row>
+		<ion-col>
+			<button clear small (click)="like($event, property)">
+				<ion-icon name="thumbs-up"></ion-icon>
+				Like
+			</button>
+		</ion-col>
+		<ion-col>
+			<button clear small (click)="favorite($event, property)">
+				<ion-icon name="star"></ion-icon>
+				Favorite
+			</button>
+		</ion-col>
+		<ion-col>
+			<button clear small (click)="addResult($event, property)">
+				<ion-icon name="ion-plus"></ion-icon>
+				Add Result
+			</button>
+		</ion-col>
+	</ion-row>
+</ion-card>

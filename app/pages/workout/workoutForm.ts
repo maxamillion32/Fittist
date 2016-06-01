@@ -22,7 +22,7 @@ export class WorkoutForm {
         // movements.bootstrap();
         // complex.bootstrap();
         // workouts.bootstrap();
-        athletes.bootstrap();
+        // athletes.bootstrap();
     }
 
     addExercise( form , _event) {

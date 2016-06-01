@@ -62,10 +62,6 @@ export class AthleteService {
 
         console.log(andrew, mike, todd);
 
-        this.athletes.push(andrew);
-        this.athletes.push(mike);
-        this.athletes.push(todd);
-
     }
 
 }
