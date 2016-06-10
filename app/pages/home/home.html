@@ -3,9 +3,12 @@
 </ion-navbar>
 
 <ion-content padding class="home">
-Home Page
 <div *ngFor="let workout of workoutPipe | async">
   <workout [workout]="workout"></workout>
+</div> 
+<div *ngFor="let result of resultPipe | async">
+	<result [result]="result"></result>
 </div>
+
   <button (click)="logout()">Logout</button>
 </ion-content>

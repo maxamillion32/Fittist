@@ -49,7 +49,7 @@ export class WorkoutService {
             name: 'Karen',
             category: 'Benchmark',
             resultType: 'For Time',
-            exercises: [{movements: movements[7] , properties: {reps: 150, weight: 20, units:'imp'}}]
+            exercises: [{movements: [movements[7]] , properties: {reps: 150, weight: 20, units:'imp'}}]
         };
 
         this.workoutsRef.push(karen);
@@ -83,8 +83,13 @@ export class WorkoutService {
 
     }
 
-    getWorkouts() {
-        return this.workouts.on('value')
+    getWorkout(id: string): Workout {
+      return firebase.database().ref('workouts/' + id).once('value');
     }
 
+    addWorkout(workout: Workout) {
+      console.log('Adding Workout: ', workout);
+        /* TODO: Check for duplicate workout based on the exercises. All the properties have to be the same */
+      return this.workoutsRef.push(workout).key;
+    }
 }

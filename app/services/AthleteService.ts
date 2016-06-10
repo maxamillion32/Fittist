@@ -10,6 +10,16 @@ export class AthleteService {
     constructor(public events:Events) {
     }
 
+    /* Get Athlete Once */
+    getAthlete(id: string) {
+        return firebase.database().ref('athletes/' + id).once('value');
+    }
+
+    /* Watch Athlete */
+    observeAthlete(id: string) {
+        // Return Observable on athlete
+    }
+
     bootstrap() {
         /* Create Some Fake Athletes */
         let andrew = {
@@ -18,7 +28,7 @@ export class AthleteService {
             email: 'andrew.thielcole@gmail.com',
             weight: 165,
             units: 'imperial',
-            workouts: /* list of results from workouts? */ [],
+            results: /* list of results from workouts? */ [],
             
         };
 
@@ -28,7 +38,7 @@ export class AthleteService {
             email: 'micheal.johnson@gmail.com',
             weight: 195,
             units: 'imperial',
-            workouts: []
+            results: []
         };
 
         let todd = {
@@ -37,7 +47,7 @@ export class AthleteService {
             email: 'todd.wise@gmail.com',
             weight: 205,
             units: 'imperial',
-            workouts: []
+            results: []
         }
 
         /* Get Workouts to use */
@@ -49,7 +59,7 @@ export class AthleteService {
                 let time = 115;
                 workout.resultDate = Date.now();
                 workout.result = time + 5;
-                todd.workouts.push(workout);
+                todd.result.push(workout);
                 workout.result = time - 5;
                 andrew.workouts.push(workout);
                 workout.result = time;

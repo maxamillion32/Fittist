@@ -5,7 +5,7 @@ export class Athlete {
 		public email: string,
 		public team?: string,
 		public units?: string,
-		public weigth?: number,
-		public workouts: any,
+		public weight?: number,
+		public results?: any
     ) {}
 }

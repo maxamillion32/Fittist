@@ -12,20 +12,36 @@
             <ion-label>Workout Name</ion-label>
             <ion-input type="text" [(ngModel)]="workout.name"></ion-input>
         </ion-item>
-
+            <ion-list>
+                <ion-item *ngFor="let complexes of workout.exercises">{{complexes.movements[0].name}}, {{complexes.properties.weight}}lbs, x{{complexes.properties.reps}}</ion-item>
+            </ion-list>
+        <ion-item>
+            <ion-label>Result</ion-label>
+            <ion-input [(ngModel)]="result" type="text"></ion-input>
+        </ion-item>
+        <div padding>   
+            <button block (click)="logWorkout(workoutForm.value, $event)">Complete Workout</button>
+        </div>    
         <ion-card padding>
-            <ion-card-header>
-                Add Exercise
-            </ion-card-header>
+            <ion-list>
+                <ion-item *ngFor="let movement of complex.movements">{{movement.name}}, x{{movement.properties.reps}}
+                </ion-item>
+            </ion-list>
             <ion-item>
-                <ion-label>Exercise Name</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-label stacked>Exercise Name</ion-label>
+                <ion-input type="text" [(ngModel)]="movement.name"></ion-input>
+                <div id="guesses"></div>
             </ion-item>
-            <button block (click)="addExercise(workoutForm.value, $event)">Add Exercise</button>
+            <ion-item>
+                <ion-label stacked>Reps</ion-label>
+                <ion-input type="number" [(ngModel)]="movement.properties.reps"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Weight</ion-label>
+                <ion-input type="number" [(ngModel)]="movement.properties.weight"></ion-input>
+            </ion-item><button block (click)="superSet()">Super Set</button>
+            <button block (click)="addExercise()">Add Exercise</button>
         </ion-card>
-        <div padding>
-            <button block (click)="completeWorkout(workoutForm.value, $event)">Complete Workout</button>
-        </div>
         <div padding>
             <p *ngIf="error" class="error">Error:&nbsp;{{ error.code }}</p>
         </div>
