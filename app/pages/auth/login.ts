@@ -1,11 +1,12 @@
 import {Page, Modal, NavController, ViewController, Events} from 'ionic-angular';
 import {AuthService} from '../../services/AuthService';
+import {AthleteService} from '../../services/AthleteService';
 import {TabsPage} from "../tabs/tabs";
-import {OnInit} from '@angular/core'
+import {OnInit} from '@angular/core';
 
 @Page({
     templateUrl: 'build/pages/auth/login.html',
-    providers: [AuthService]
+    providers: [AuthService, AthleteService]
 })
 export class LoginPage {
 
@@ -14,7 +15,8 @@ export class LoginPage {
 
     constructor(public nav: NavController,
                 private authService: AuthService,
-                public events: Events) {
+                public events: Events,
+                private athletes: AthleteService) {
         this.authInfo = this.authService.getAuth();
     }
 
@@ -34,6 +36,9 @@ export class LoginPage {
         this.authService.createUser(credentials).catch((error) => {
             this.error = error;
             console.warn('Error Signing In: ', error);
+        }).then( (user) => {
+            console.log('Register User Data' , user);
+            this.athletes.createAthlete(user.uid, credentials.email);
         });
     }
 }

@@ -10,6 +10,12 @@ export class AthleteService {
     constructor(public events:Events) {
     }
 
+    createAthlete(id: string, username: string) {
+        return firebase.database().ref('athletes/' + id).set({
+            username: username
+        });
+    }
+
     /* Get Athlete Once */
     getAthlete(id: string) {
         return firebase.database().ref('athletes/' + id).once('value');

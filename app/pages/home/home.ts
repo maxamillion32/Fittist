@@ -20,7 +20,6 @@ export class HomePage implements OnInit {
 
   public workouts: Workout[];
   public workoutPipe: Observable<Workout[]>;
-  public subscription: Subscription<Workout>;
   public resultPipe: Observable<Result[]>;
 
   constructor(private auth: AuthService,

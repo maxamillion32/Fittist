@@ -64,12 +64,11 @@ export class WorkoutService {
             let listener = this.workoutsRef.on('child_added', snapshot => {
                 let data = snapshot.val();
                 let workout = new Workout(
-                    snapshot.key,
+                    data.name,
                     data.category,
                     data.exercises,
                     data.resultType,
-                    data.result,
-                    data.name
+                    snapshot.key
                 );
                 workouts.push(workout);
                 observer.next(workouts);
@@ -89,7 +88,7 @@ export class WorkoutService {
 
     addWorkout(workout: Workout) {
       console.log('Adding Workout: ', workout);
-        /* TODO: Check for duplicate workout based on the exercises. All the properties have to be the same */
+        /* TODO:Check for duplicate workout based on the exercises. All the properties have to be the same */
       return this.workoutsRef.push(workout).key;
     }
 }
