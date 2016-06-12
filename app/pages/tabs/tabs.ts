@@ -4,6 +4,7 @@ import {Page2} from '../page2/page2';
 import {Page3} from '../page3/page3';
 import {WorkoutForm} from "../workout/workoutForm";
 import {HomePage} from '../home/home';
+import {UserPage} from '../user/user';
 
 @Page({
   templateUrl: 'build/pages/tabs/tabs.html'
@@ -13,6 +14,6 @@ export class TabsPage {
   // should be each tab's root Page
   tab1Root:any = HomePage;
   tab2Root:any = WorkoutForm;
-  tab3Root:any = Page3;
+  tab3Root:any = UserPage;
 
 }

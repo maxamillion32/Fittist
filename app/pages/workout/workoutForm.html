@@ -21,7 +21,7 @@
         </ion-item>
         <div padding>   
             <button block (click)="logWorkout(workoutForm.value, $event)">Complete Workout</button>
-        </div>    
+        </div>
         <ion-card padding>
             <ion-list>
                 <ion-item *ngFor="let movement of complex.movements">{{movement.name}}, x{{movement.properties.reps}}
