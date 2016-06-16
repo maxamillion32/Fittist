@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Events} from 'ionic-angular';
+import {Observable} from 'rxjs/Observable';
+import {Movement} from '../model/movement';
 
 @Injectable()
 export class MovementService {
@@ -28,6 +30,31 @@ export class MovementService {
         for (var i = 0; i < movements.length; i++) {
             this.movements.push(movements[i]);
         }
+    }
+
+    getAll(): Observable<Movement[]> {
+
+        /* Streams Workouts one at a time */
+        return Observable.create((observer) => {
+            let movementList: Movement[] = [];
+            let listener = this.movements.on('child_added', snapshot => {
+                let data = snapshot.val();
+                let movement = new Movement(
+                    data.name,
+                    data.type,
+                    data.properties,
+                    snapshot.key,
+                    data.verified
+                );
+                movementList.push(movement);
+                observer.next(movementList);
+            }, observer.error);
+
+            return () => {
+                this.movements.on('child_added', listener);
+            }
+        });
+
     }
 
 }

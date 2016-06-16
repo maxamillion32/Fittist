@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Events} from 'ionic-angular';
+import {Complex} from '../model/complex';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class ComplexService {
-    public complex = firebase.database().ref('complex');
+    public complexes = firebase.database().ref('complex');
 
     constructor(public events:Events) {
     }
@@ -32,6 +34,37 @@ export class ComplexService {
             this.complex.push({movements: [movements[i]], properties: movements[i].properties});
         }
 
+    }
+
+    addComplex(complex: Complex): Observable<string> {
+        /* Create Unique ID via Hash */
+        var name = '';
+        for (var i = 0; i < complex.movements.length; i++) {
+            name += complex.movements[i];
+        }
+        var hash = this.hashCode(name);
+        console.log("Hash Value: ", hash , complex);
+        
+        /* Look for complex */
+        return Observable.create((observer) => {
+            let listener = this.complexes.child(hash).once('value').then((snapshot) => {
+                            if (snapshot.val()) {
+                                observer.next(snapshot.key);
+                            } else {
+                                complex.id = hash;
+                                this.complexes.child(hash).set(complex);
+                                observer.next(hash);
+                            }
+                     }, observer.error );
+            return () => {
+                console.log('Add Complex Completed');
+                return;
+            }
+        });
+    }
+
+    hashCode(s) {
+        return s.split("").reduce(function(a, b) { a = ((a << 5) - a) + b.charCodeAt(0); return a & a }, 0);
     }
 
 }

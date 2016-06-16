@@ -67,6 +67,7 @@ export class ResultService {
     addResult(result: Result) {
         /* Because of the date, there are no duplicates */
         return this.resultsRef.push(result);
+        /* After adding result, see if there are any pr's for the athlete on the workout, and on the exercises within */
     }
 
 }

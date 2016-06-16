@@ -21,7 +21,7 @@
 		<ion-icon item-right name="arrow-down"> </ion-icon> 
 		</ion-item>
 		<ion-item *ngFor="let exercises of workout.exercises">
-			{{exercises.movements[0].name}} <h4 item-right> x{{exercises.properties.reps}} </h4>
+			{{exercises.complex}} <h4 item-right> x{{exercises.properties.reps}} </h4>
 		</ion-item>
 	</ion-list>
 </ion-card>

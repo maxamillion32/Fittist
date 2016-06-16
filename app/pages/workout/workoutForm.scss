@@ -1,0 +1,24 @@
+.workoutForm {
+	.suggestionList {
+		    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    		-webkit-box-shadow: 1px 5px 5px 0px rgba(0,0,0,0.4);
+    		list-style: none;
+    		padding: 0px;
+    		max-heigth: 150px;
+	
+    		li {
+    			padding: 5px;
+    			font-size: 1.4rem;
+    		}
+    		li:hover {
+    			background-color: #387ef5;
+    			color: white;
+    		}
+
+    	.show { display: block; }
+    	.hide {
+    			display: none;
+    	}
+    }
+
+}

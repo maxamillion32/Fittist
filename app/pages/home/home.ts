@@ -16,7 +16,7 @@ import 'rxjs';
   providers: [AuthService, WorkoutService, ResultService],
   directives: [WorkoutComponent, ResultComponent]
 })
-export class HomePage implements OnInit {
+export class HomePage {
 
   public workouts: Workout[];
   public workoutPipe: Observable<Workout[]>;

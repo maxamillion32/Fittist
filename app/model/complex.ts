@@ -1,6 +1,7 @@
 export class Complex {
 	constructor(
-		public movements: any,
+		public id: string,
+		public movements: Array<string>,
 		public properties: any
 	) {}
 }

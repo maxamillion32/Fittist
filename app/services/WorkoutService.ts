@@ -75,7 +75,7 @@ export class WorkoutService {
             }, observer.error);
 
             return () => {
-                this.workoutsRef.on('child_added', listener);
+                this.workoutsRef.off('child_added', listener);
             }
 
         });
