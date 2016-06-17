@@ -5,19 +5,17 @@ import {AthleteService} from '../../services/AthleteService';
 import {Workout} from '../../model/workout';
 import {Athlete} from '../../model/athlete';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs';
 
 @Page({
   templateUrl: 'build/pages/user/user.html',
-  providers: [AuthService, AthleteService],
-  directives: []
+  providers: [AuthService, AthleteService]
 })
 export class UserPage implements OnInit {
 
   public athlete: any;
 
-  constructor(public auth: AuthService,
-              public athletes: AthleteService) {
+  constructor(private auth: AuthService,
+              private athletes: AthleteService) {
    
   }
 

@@ -1,6 +1,11 @@
+
 <ion-navbar *navbar>
-  <ion-title>Home</ion-title>
+  <ion-title>
+    User Page
+  </ion-title>
 </ion-navbar>
+
+<ion-content class="userPage">
 <div *ngIf="athlete">
 Hello User {{athlete.name}}
 <ion-card>
@@ -29,3 +34,4 @@ Percentage Calculator
 	</ion-row>
 </ion-card>
 </div>
+</ion-content>
