@@ -12,7 +12,7 @@ import 'rxjs';
   providers: [AuthService, AthleteService],
   directives: []
 })
-export class UserPage implements ngOnInit {
+export class UserPage implements OnInit {
 
   public athlete: any;
 

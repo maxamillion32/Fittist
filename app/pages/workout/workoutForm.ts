@@ -11,10 +11,12 @@ import {AthleteService} from '../../services/AthleteService';
 import {ResultService} from '../../services/ResultService';
 import {AuthService} from '../../services/AuthService';
 import {Observable} from 'rxjs/Observable';
+import {ExerciseComponent} from '../../components/exercise/exercise.comp';
 import 'rxjs';
 
 @Page({
     templateUrl: 'build/pages/workout/workoutForm.html',
+    directives: [ExerciseComponent],
     providers:[MovementService, ComplexService, WorkoutService, AthleteService, ResultService, AuthService]
 })
 export class WorkoutForm {
@@ -69,9 +71,9 @@ export class WorkoutForm {
         this.complex.movements.push(this.movement.id);
         /* Add Exercise to the exercise list */
         // Form has name
-        let addComplex = new Complex(this.complex.movements, 
-                ['reps' , 'weight'],
-                '');
+        let addComplex = new Complex('', 
+                this.complex.movements,
+                ['reps' , 'weight']);
         /* Add Complex */
         this.complexes.addComplex(addComplex).subscribe((value) => {
             console.log('Complex Id: ' + value);
@@ -80,6 +82,9 @@ export class WorkoutForm {
                 properties: { reps: this.reps, weight: this.weight }
             });
         });
+
+        /* Reset Movement */
+        this.movement.reset();
     }
 
     logWorkout() {
@@ -103,6 +108,8 @@ export class WorkoutForm {
         console.log("Logging Result: ", result);
         /* Add Result */
         this.results.addResult(result);
+        this.movement.reset();
+        this.complex.reset();
     }
 
     get diagnostic() {
@@ -129,5 +136,4 @@ export class WorkoutForm {
                      this.suggest = false;
         }, 200);
     }
-
 }

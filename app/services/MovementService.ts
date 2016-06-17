@@ -57,4 +57,8 @@ export class MovementService {
 
     }
 
+    getMovement(id: string) {
+        return this.movements.child(id).once('value');
+    }
+
 }

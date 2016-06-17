@@ -15,13 +15,13 @@
 	<!-- Workout Details Here -->
 	<ion-list inset *ngIf="workout">
 		<ion-item> 
-		<h2>{{workout.name}}</h2>
-		<h2> {{workout.resultType}}</h2>
-		<h2 item-right padding-right> {{result.result}}s </h2>
-		<ion-icon item-right name="arrow-down"> </ion-icon> 
+			<h2>{{workout.name}}</h2>
+			<h2> {{workout.resultType}}</h2>
+			<h2 item-right padding-right> {{result.result}}s </h2>
+			<ion-icon item-right name="arrow-down"> </ion-icon> 
 		</ion-item>
-		<ion-item *ngFor="let exercises of workout.exercises">
-			{{exercises.complex}} <h4 item-right> x{{exercises.properties.reps}} </h4>
-		</ion-item>
+		<div *ngFor="let exercises of workout.exercises">
+			<exercise [exercise]="exercises"></exercise>
+		</div>
 	</ion-list>
 </ion-card>

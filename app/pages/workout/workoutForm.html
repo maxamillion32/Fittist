@@ -13,7 +13,7 @@
             <ion-input type="text" [(ngModel)]="workout.name"></ion-input>
         </ion-item>
             <ion-list>
-                <ion-item *ngFor="let complexes of workout.exercises">{{complexes.complex}}, {{complexes.properties.weight}}lbs, x{{complexes.properties.reps}}</ion-item>
+                <div *ngFor="let exercises of workout.exercises"><exercise [exercise]="exercises"></exercise></div>
             </ion-list>
         <ion-item>
             <ion-label>Result</ion-label>
