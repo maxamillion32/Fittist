@@ -39,13 +39,13 @@ export class MovementService {
             let movementList: Movement[] = [];
             let listener = this.movements.on('child_added', snapshot => {
                 let data = snapshot.val();
-                let movement = new Movement(
-                    data.name,
-                    data.type,
-                    data.properties,
-                    snapshot.key,
-                    data.verified
-                );
+                let movement = new Movement({
+                    name: data.name,
+                    type: data.type,
+                    properties: data.properties,
+                    id: snapshot.key,
+                    verified: data.verified
+                });
                 movementList.push(movement);
                 observer.next(movementList);
             }, observer.error);

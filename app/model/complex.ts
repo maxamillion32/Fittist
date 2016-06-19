@@ -3,19 +3,15 @@ export class Complex {
 	public movements: Array<string>;
 	public properties: any;
 
-	constructor(
-		id: string,
-		movements: Array<string>,
-		properties: any
-	) {	
-		this.id = id || '';
-		this.movements = movements || [];
-		this.properties = properties || {};
+	constructor(obj?: any) {
+		this.id = obj && obj.id || '';
+		this.movements = obj && obj.movements || [];
+		this.properties = obj && obj.properties || [];
 	}
 
 	reset() {
 		this.id = '';
 		this.movements = [];
-		this.properties = {};
+		this.properties = [];
 	}
 }

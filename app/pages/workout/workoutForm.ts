@@ -26,8 +26,8 @@ export class WorkoutForm {
     public reps = 0;
     public weight = 0;
     public workout: Workout = new Workout('New Workout' , 'None', [], 'For Time', '');
-    public complex: Complex = new Complex('' , [], ['reps' , 'weight']);
-    public movement: Movement = new Movement('Name', 'Type', ['reps' , 'weight'], '' , false);
+    public complex: Complex = new Complex();
+    public movement: Movement = new Movement();
     public result: any;
     public movementInput = '';
     isSuperSet: boolean = false;
@@ -62,7 +62,7 @@ export class WorkoutForm {
     superSet() {
         // Just need the movement id
         this.complex.movements.push(this.movement.id);
-        this.movement = new Movement('Name', 'Type', ['reps' , 'weight'], '', false);
+        this.movement = new Movement();
         this.isSuperSet = true;
     }
 
@@ -71,9 +71,12 @@ export class WorkoutForm {
         this.complex.movements.push(this.movement.id);
         /* Add Exercise to the exercise list */
         // Form has name
-        let addComplex = new Complex('', 
-                this.complex.movements,
-                ['reps' , 'weight']);
+        let addComplex = new Complex({
+            id: '',
+            movements: this.complex.movements,
+            properties: ['reps', 'weight']
+        });
+
         /* Add Complex */
         this.complexes.addComplex(addComplex).subscribe((value) => {
             console.log('Complex Id: ' + value);
@@ -84,7 +87,8 @@ export class WorkoutForm {
         });
 
         /* Reset Movement */
-        this.movement.reset();
+        this.movement = new Movement({});
+        this.complex = new Complex({});
     }
 
     logWorkout() {
@@ -108,8 +112,11 @@ export class WorkoutForm {
         console.log("Logging Result: ", result);
         /* Add Result */
         this.results.addResult(result);
-        this.movement.reset();
-        this.complex.reset();
+
+        /* reset variables */
+        this.movement = new Movement({});
+        this.complex = new Complex({});
+        this.workout.reset();
     }
 
     get diagnostic() {
@@ -117,9 +124,6 @@ export class WorkoutForm {
     }
 
     selectMovement(movement) {
-        if (movement.properties === undefined) {
-            movement.properties = {};
-        }
         this.movement = movement;
         this.suggest = false;
     }
