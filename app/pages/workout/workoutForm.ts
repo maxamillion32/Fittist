@@ -1,5 +1,6 @@
-import {Page, NavController, Modal, Events} from 'ionic-angular';
+import {Page, NavController, Modal, Events, NavParams} from 'ionic-angular';
 import {Control} from '@angular/common';
+import {Input, OnInit} from '@angular/core';
 import {Workout} from '../../model/workout';
 import {Complex} from '../../model/complex';
 import {Movement} from '../../model/movement';
@@ -19,13 +20,13 @@ import 'rxjs';
     directives: [ExerciseComponent],
     providers:[MovementService, ComplexService, WorkoutService, AthleteService, ResultService, AuthService]
 })
-export class WorkoutForm {
+export class WorkoutForm implements OnInit {
 
+    public workout: Workout = new Workout({});
     error: any;
     public name = '';
     public reps = 0;
     public weight = 0;
-    public workout: Workout = new Workout('New Workout' , 'None', [], 'For Time', '');
     public complex: Complex = new Complex();
     public movement: Movement = new Movement();
     public result: any;
@@ -39,7 +40,8 @@ export class WorkoutForm {
                 private workouts: WorkoutService,
                 private athletes: AthleteService,
                 private results: ResultService,
-                private auth: AuthService) {
+                private auth: AuthService,
+                private params: NavParams) {
         /* Code for autocomplete */
         this.name = new Control();
         this.searchResults = this.name.valueChanges
@@ -57,6 +59,19 @@ export class WorkoutForm {
             console.log(names);
             return names;
         });
+
+            if (this.params.get('workout')) {
+                this.workout = this.params.get('workout');
+                console.log('Recieved Workout: ', this.params.get('workout'));
+            }
+    }
+
+    ngOnInit() {
+        /* Check for workout input */
+        if (!this.workout) {
+            console.log('No workout given');
+            this.workout = new Workout({});
+        }
     }
 
     superSet() {

@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Page, NavController, Modal, Events} from 'ionic-angular';
 import {Result} from '../../model/result';
 import {Athlete} from '../../model/athlete';
 import {Workout} from '../../model/workout';
@@ -7,6 +8,7 @@ import {WorkoutService} from '../../services/WorkoutService';
 import {ComplexService} from '../../services/ComplexService';
 import {MovementService} from '../../services/MovementService';
 import {ExerciseComponent} from '../exercise/exercise.comp';
+import {WorkoutForm} from '../../pages/workout/workoutForm';
 
 @Component({
 	selector: 'result',
@@ -23,13 +25,15 @@ export class ResultComponent implements OnInit{
 	constructor(public workouts: WorkoutService,
 				public athletes: AthleteService,
 				private complexes: ComplexService,
-				private movements: MovementService) {
+				private movements: MovementService,
+				private nav: NavController) {
 	}
 
 	ngOnInit() {
 		this.workouts.getWorkout(this.result.workoutId).then(snapshot => {
+			console.log('Getting Workout: ' , snapshot.val());
 			this.workout = snapshot.val();
-			
+			this.workout.id = snapshot.key;
 		});
 
 		this.athletes.getAthlete(this.result.athleteId).then(snapshot => {
@@ -47,6 +51,11 @@ export class ResultComponent implements OnInit{
 
 	get athleteDiag() {
 		return JSON.stringify(this.athlete);
+	}
+
+	addResult(_event, workout) {
+		console.log('Add a result to ', workout);
+		this.nav.push(WorkoutForm, { workout: this.workout });
 	}
 
 

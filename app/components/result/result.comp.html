@@ -20,8 +20,28 @@
 			<h2 item-right padding-right> {{result.result}}s </h2>
 			<ion-icon item-right name="arrow-down"> </ion-icon> 
 		</ion-item>
-		<div *ngFor="let exercises of workout.exercises">
-			<exercise [exercise]="exercises"></exercise>
-		</div>
+			<div *ngFor="let exercises of workout.exercises">
+				<exercise [exercise]="exercises"></exercise>
+			</div>
 	</ion-list>
+	<ion-row>
+		<ion-col>
+			<button clear small (click)="like($event, property)">
+				<ion-icon name="thumbs-up"></ion-icon>
+				Like
+			</button>
+		</ion-col>
+		<ion-col>
+			<button clear small (click)="favorite($event, property)">
+				<ion-icon name="star"></ion-icon>
+				Favorite
+			</button>
+		</ion-col>
+		<ion-col>
+			<button clear small (click)="addResult($event, workout)">
+				<ion-icon name="plus"></ion-icon>
+				Add Result
+			</button>
+		</ion-col>
+	</ion-row>
 </ion-card>
