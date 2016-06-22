@@ -1,8 +1,15 @@
 <ion-navbar *navbar>
   <ion-title>Tabs</ion-title>
 </ion-navbar>
+<div style="z-index: 1000;">
+	<button fab fab-right class="floating-action">
+		<ion-icon name="add"></ion-icon>
+	</button>
+</div>
 <ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="pulse"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="Add Work" tabIcon="add-circle"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="Personal" tabIcon="person"></ion-tab>
+  <ion-tab [root]="tab1Root" id="Home" tabIcon="pulse"></ion-tab>
+  <ion-tab [root]="tab2Root" id="Workouts" tabIcon="medal"></ion-tab>
+  <ion-tab [root]="tab3Root" id="Team" tabIcon="people"></ion-tab>
+  <ion-tab [root]="tab4Root" id="Movements" tabIcon="walk"></ion-tab>
+  <ion-tab [root]="tab5Root" id="Me" tabIcon="person"></ion-tab>
 </ion-tabs>

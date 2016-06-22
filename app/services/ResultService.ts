@@ -37,7 +37,8 @@ export class ResultService {
         /* Streams Workouts one at a time */
         return Observable.create((observer) => {
             let results: Result[] = [];
-            let listener = this.resultsRef.on('child_added', snapshot => {
+            let listener = this.resultsRef.orderByKey().on('child_added', snapshot => {
+                console.log('Recieved Result from service');
                 let data = snapshot.val();
                 let result = new Result(
                     snapshot.key,
@@ -66,6 +67,9 @@ export class ResultService {
 
     addResult(result: Result) {
         /* Because of the date, there are no duplicates */
+        if (result.completionDate === '') {
+            result.completionDate = new Date();
+        }
         return this.resultsRef.push(result);
         /* After adding result, see if there are any pr's for the athlete on the workout, and on the exercises within */
     }

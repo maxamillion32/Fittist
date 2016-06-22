@@ -7,6 +7,7 @@ import {AthleteService} from '../../services/AthleteService';
 import {WorkoutService} from '../../services/WorkoutService';
 import {ComplexService} from '../../services/ComplexService';
 import {MovementService} from '../../services/MovementService';
+import {AuthService} from '../../services/AuthService';
 import {ExerciseComponent} from '../exercise/exercise.comp';
 import {WorkoutForm} from '../../pages/workout/workoutForm';
 
@@ -14,7 +15,7 @@ import {WorkoutForm} from '../../pages/workout/workoutForm';
 	selector: 'result',
 	templateUrl: 'build/components/result/result.comp.html',
 	directives: [ExerciseComponent],
-	providers: [WorkoutService, AthleteService, ComplexService, MovementService]
+	providers: [WorkoutService, AthleteService, AuthService, ComplexService, MovementService]
 })
 export class ResultComponent implements OnInit{
 	@Input()
@@ -26,18 +27,18 @@ export class ResultComponent implements OnInit{
 				public athletes: AthleteService,
 				private complexes: ComplexService,
 				private movements: MovementService,
-				private nav: NavController) {
+				private nav: NavController,
+				private auth: AuthService) {
 	}
 
 	ngOnInit() {
 		this.workouts.getWorkout(this.result.workoutId).then(snapshot => {
-			console.log('Getting Workout: ' , snapshot.val());
 			this.workout = snapshot.val();
 			this.workout.id = snapshot.key;
 		});
-
-		this.athletes.getAthlete(this.result.athleteId).then(snapshot => {
-			this.athlete = snapshot.val();
+		console.log('Auth', this.auth.getAuth());
+		this.athletes.getAthlete(this.auth.getAuth().uid).subscribe((data) => {
+			this.athlete = data;
 		});
 	}
 

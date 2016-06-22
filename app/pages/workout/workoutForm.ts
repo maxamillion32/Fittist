@@ -110,11 +110,20 @@ export class WorkoutForm implements OnInit {
         console.log("Logging Workout: " , this.workout);
 
         /* Create Workout, Then Log Result */
-        let workoutId = this.workouts.addWorkout(this.workout);
-        console.log(workoutId);
+        let workoutId = this.workout.id;
+        if (workoutId === '') {
+            console.log('Creating New Workout');
+            this.workout.category = 'Custom';
+            workoutId = this.workouts.addWorkout(this.workout);
+        }
+
+        /* Check For Pr's */
+        this.athletes.addRecords(this.workout);
+        
+        console.log('Workout ID: ' , workoutId);
         let athleteId = this.auth.getAuth().uid;
 
-        console.log(athleteId);
+        console.log('Athlete Id: ' , athleteId);
         let result = new Result(
             '',
             this.workout.name,
@@ -131,7 +140,7 @@ export class WorkoutForm implements OnInit {
         /* reset variables */
         this.movement = new Movement({});
         this.complex = new Complex({});
-        this.workout.reset();
+        this.workout = new Workout({});
     }
 
     get diagnostic() {
@@ -145,7 +154,6 @@ export class WorkoutForm implements OnInit {
 
     showSuggestions() {
         /* Toggle Drop Down */
-        console.log('active');
         this.suggest = true;
     }
 

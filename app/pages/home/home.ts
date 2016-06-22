@@ -7,6 +7,7 @@ import {ResultComponent} from '../../components/result/result.comp';
 import {WorkoutService} from '../../services/WorkoutService';
 import {ResultService} from '../../services/ResultService';
 import {Workout} from '../../model/workout';
+import {Result} from '../../model/result';
 import {Subscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs';
@@ -21,6 +22,7 @@ export class HomePage {
   public workouts: Workout[];
   public workoutPipe: Observable<Workout[]>;
   public resultPipe: Observable<Result[]>;
+  public results: Result[] = [];
 
   constructor(private auth: AuthService,
               private work: WorkoutService,

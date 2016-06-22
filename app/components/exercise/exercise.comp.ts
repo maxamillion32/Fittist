@@ -21,16 +21,12 @@ export class ExerciseComponent implements OnInit {
 	 }
 
 	 ngOnInit() {
-		 console.log('Exercise: ', this.exercise);
 		 if (this.exercise.complex) {
 			 this.complexes.getComplex(this.exercise.complex).then((snapshot) => {
 				 this.complex = snapshot.val();
-				 console.log('Complex: ', this.complex);
 				 for (var i = 0; i < this.complex.movements.length; i++) {
-					 console.log('trying to get: ', this.complex.movements[i]);
 					 this.movements.getMovement(this.complex.movements[i]).then((snapshot) => {
 						 var move = snapshot.val();
-						 console.log('Movement: ', move);
 						 this.movementList.push(move);
 					 });
 				 }
