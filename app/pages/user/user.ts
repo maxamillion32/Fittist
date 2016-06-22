@@ -20,11 +20,13 @@ export class UserPage implements OnInit {
   }
 
   ngOnInit() {
+    /*
     console.log('init');
     this.athletes.getAthlete(this.auth.getAuth().uid).then(snapshot => {
       this.athlete = snapshot.val();
       console.log('seting athlete', snapshot.val());
     });
+    */
   }
   
 }
