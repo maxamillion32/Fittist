@@ -1,24 +1,18 @@
-import {Page, Modal, NavController, ViewController, Events} from 'ionic-angular';
+import {Page, Events} from 'ionic-angular';
 import {AuthService} from '../../services/AuthService';
 import {AthleteService} from '../../services/AthleteService';
-import {TabsPage} from "../tabs/tabs";
-import {OnInit} from '@angular/core';
 
 @Page({
     templateUrl: 'build/pages/auth/login.html',
-    providers: [AuthService, AthleteService]
+    providers: [AthleteService, AuthService]
 })
 export class LoginPage {
 
     public error: any;
-    public authInfo: any;
+    public createAccount: boolean = false;
 
-    constructor(public nav: NavController,
-                private authService: AuthService,
-                public events: Events,
-                private athletes: AthleteService) {
-        this.authInfo = this.authService.getAuth();
-    }
+    constructor(private authService: AuthService,
+                private athletes: AthleteService) {}
 
     login( credentials, _event) {
         _event.preventDefault();
@@ -41,4 +35,11 @@ export class LoginPage {
             this.athletes.createAthlete(user.uid, credentials.email);
         });
     }
-}
+
+    create(_event) {
+        _event.preventDefault();
+        console.log('Create Button');
+        this.createAccount = true;
+    }
+
+} 

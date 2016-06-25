@@ -1,10 +1,31 @@
-<ion-navbar *navbar>
-    <ion-title>Login</ion-title>
-</ion-navbar>
+<ion-content scroll="false" class="content">
+    <div padding class="login" *ngIf="!createAccount">
+        <h1 class="title">Fittist</h1>
+        <form #loginCreds="ngForm" class="login-form">
+            <ion-item class="username">
+                <ion-label>Username</ion-label>
+                <ion-input type="text" ngControl="email"></ion-input>
+            </ion-item>
+            <ion-item class="password">
+                <ion-label>Password</ion-label>
+                <ion-input type="password" ngControl="password"></ion-input>
+            </ion-item>
 
-<ion-content padding>
-    <h1>User Login</h1>
-    <form #loginCreds="ngForm">
+            <div padding class="login-button">
+                <button block (click)="login(loginCreds.value, $event)">Login</button>
+                <p>Don't have an account already? </p>
+            </div>
+            <div padding class="create">
+                <button block (click)="create($event)">Create Account</button>
+            </div>
+            <div padding>
+                <p *ngIf="error" class="error">Error:&nbsp;{{ error.code }}</p>
+            </div>
+        </form>
+    </div>
+    <div padding class="createAccount" *ngIf="createAccount">
+        <form #accountCreds="ngForm">
+        <h1>Create an Account</h1>
         <ion-item>
             <ion-label>Username</ion-label>
             <ion-input type="text" ngControl="email"></ion-input>
@@ -14,13 +35,11 @@
             <ion-label>Password</ion-label>
             <ion-input type="password" ngControl="password"></ion-input>
         </ion-item>
-
-        <div padding>
-            <button block (click)="login(loginCreds.value, $event)">Login</button>
-            <button block (click)="registerUser(loginCreds.value, $event)">Create Account</button>
-        </div>
+        <button block (click)="registerUser(accountCreds.value, $event)">Create Account
+        </button>
         <div padding>
             <p *ngIf="error" class="error">Error:&nbsp;{{ error.code }}</p>
         </div>
-    </form>
+        </form>
+    </div>
 </ion-content>

@@ -5,6 +5,11 @@
   </ion-title>
 </ion-navbar>
 
-<ion-content class="userPage" *ngIf="athlete">
-Hello Athlete {{athlete.name}}
+<ion-content class="userPage">
+<button (click)="logout()">
+	Logout
+</button>
+<div *ngIf="athlete">
+	Hello Athlete {{athlete.name}}
+</div>
 </ion-content>

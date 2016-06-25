@@ -22,7 +22,6 @@ export class HomePage {
   public workouts: Workout[];
   public workoutPipe: Observable<Workout[]>;
   public resultPipe: Observable<Result[]>;
-  public results: Result[] = [];
 
   constructor(private auth: AuthService,
               private work: WorkoutService,
@@ -32,11 +31,6 @@ export class HomePage {
     /* Get list of workouts from the workout service */
     this.workoutPipe = this.work.getAll();
     this.resultPipe = this.result.getAll();
-  }
-
-  logout() {
-    this.auth.logout();
-    this.events.publish('user:logout');
   }
 
   get diagnostic() {

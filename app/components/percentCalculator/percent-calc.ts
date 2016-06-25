@@ -2,16 +2,16 @@ import {Component, Input} from '@angular/core';
 import {Workout} from '../../model/workout';
 
 @Component({
-	selector: 'workout',
-	templateUrl: 'build/components/workout/workout.comp.html'
+	selector: 'percent-calculator',
+	templateUrl: 'build/components/workout/percent-calc.comp.html'
 })
 export class PercentCalcComponent {
 	@Input()
-	workout: any;
+	complex: any;
 
 	constructor() {}
 
 	get diagnostic() {
-		return JSON.stringify(this.workout);
+		return JSON.stringify(this.complex);
 	}
 }

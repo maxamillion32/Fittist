@@ -35,7 +35,8 @@ export class WorkoutForm implements OnInit {
     searchResults: Observable<any>;
     public suggest: boolean = false;
 
-    constructor(private movements: MovementService,
+    constructor(private nav: NavController,
+                private movements: MovementService,
                 private complexes: ComplexService,
                 private workouts: WorkoutService,
                 private athletes: AthleteService,
@@ -118,7 +119,6 @@ export class WorkoutForm implements OnInit {
         }
 
         /* Check For Pr's */
-        this.athletes.addRecords(this.workout);
         
         console.log('Workout ID: ' , workoutId);
         let athleteId = this.auth.getAuth().uid;
@@ -137,10 +137,14 @@ export class WorkoutForm implements OnInit {
         /* Add Result */
         this.results.addResult(result);
 
+        this.athletes.addRecords(this.workout, athleteId);
+
         /* reset variables */
         this.movement = new Movement({});
         this.complex = new Complex({});
         this.workout = new Workout({});
+
+        this.nav.pop();
     }
 
     get diagnostic() {

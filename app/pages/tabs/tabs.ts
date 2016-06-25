@@ -18,4 +18,21 @@ export class TabsPage {
   tab4Root:any = MovementPage;
   tab5Root: any = UserPage;
 
+  public showMenu: boolean = false;
+
+  constructor(private nav: NavController) {
+
+  }
+
+  addMenu() {
+	  console.log('add menu');
+	  this.showMenu = !this.showMenu;
+  }
+
+  createWorkout() {
+  	  /* Doesnt need to toggle */
+	  this.showMenu = false;
+	  this.nav.push(WorkoutForm);
+  }
+
 }

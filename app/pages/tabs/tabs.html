@@ -2,7 +2,15 @@
   <ion-title>Tabs</ion-title>
 </ion-navbar>
 <div style="z-index: 1000;">
-	<button fab fab-right class="floating-action">
+	<div *ngIf="showMenu">
+		<div class="option-label">
+			<label class="label">Add Workout</label>
+		</div>
+		<button *ngIf="showMenu" fab fab-right class="floating-option" (click)="createWorkout()">
+			<ion-icon name="medal"></ion-icon>
+		</button>
+	</div>
+	<button fab fab-right class="floating-action" (click)="addMenu()">
 		<ion-icon name="add"></ion-icon>
 	</button>
 </div>

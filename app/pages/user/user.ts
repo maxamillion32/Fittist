@@ -28,5 +28,9 @@ export class UserPage implements OnInit {
     });
     */
   }
+
+  logout() {
+    this.auth.logout();
+  }
   
 }

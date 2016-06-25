@@ -1,0 +1,46 @@
+.login {
+	text-align: center;
+	margin-top: 100px;
+	background: whitesmoke;
+	opacity: .9;
+	border-radius: 5px;
+  /* -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px); */
+}
+.title {
+	color: steelgrey;
+}
+.username {
+	border-radius: 5px 5px 0px 0px;
+}
+.password {
+	border-radius: 0px 0px 5px 5px;
+}
+
+.createAccount {
+	text-align: center;
+	padding-top: 100px;
+}
+
+.content:before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  
+  display: block;
+  background: url('../../img/cropped-jordan-comp.png') no-repeat fixed center;
+  background-size: 800px 700px;
+  width: 100%;
+  height: 100%;
+}
+.content {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 0;
+}

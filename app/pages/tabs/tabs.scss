@@ -1,3 +1,20 @@
 .floating-action {
 	bottom: 75px;
 }
+.floating-option {
+	bottom: 145px;
+	width: 40px;
+	height: 40px;
+	right: 22px;
+}
+.option-label {
+	position: absolute;
+	bottom: 155px;
+	border-radius: 5px;
+	background: rgba(51, 35, 35, 0.8);
+	color: white;
+	padding: 5px;
+	width: 100px;
+	text-align: center;
+	right: 72px;
+}

@@ -1,7 +1,7 @@
-import {App, Platform, NavController, Events} from 'ionic-angular';
+import {App, Platform, NavController, Modal, Events} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
-import {enableProdMode} from '@angular/core';
+import {enableProdMode, ViewChild} from '@angular/core';
 import {LoginPage} from "./pages/auth/login";
 
 enableProdMode();
@@ -21,8 +21,9 @@ firebase.initializeApp(config);
   } // http://ionicframework.com/docs/v2/api/config/Config/
 })
 export class MyApp {
+  @ViewChild(NavController) nav;
   
-  rootPage: any = TabsPage;
+  rootPage: any = LoginPage;
 
   constructor(platform: Platform,
               public events: Events) {
@@ -33,17 +34,23 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
     });
+    
+  }
 
+  ngAfterViewInit() {
     this.listenToLoginEvents();
   }
 
   listenToLoginEvents() {
-     firebase.auth().onAuthStateChanged( (user) => {
-       if (user) {
-         this.rootPage = TabsPage;
-       } else {
-         this.rootPage = LoginPage;
-       }
-     })
+    let modal = Modal.create(LoginPage);
+
+    firebase.auth().onAuthStateChanged((user) => {
+      console.log('Auth State Changed: ', user);
+      if (null !== user) {
+        this.rootPage = TabsPage;
+      } else if (this.rootPage === TabsPage ) {
+        this.rootPage = LoginPage;
+      }
+    });
   }
 }

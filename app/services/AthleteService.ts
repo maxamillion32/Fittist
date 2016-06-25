@@ -6,22 +6,13 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class AthleteService {
 
-    public id = firebase.auth().currentUser.uid;
+    public id: string;
     public athletes = firebase.database().ref('athletes');
     public workouts = firebase.database().ref('workouts');
     public cachedData: any = {};
 
     constructor(public events:Events) {
         /* Get Athlete Information, on creation cache athlete info */
-
-        if (!this.cachedData.athlete) {
-            this.athletes.child(this.id).once('value').then((data) => {
-                this.cachedData.athlete = data.val();
-                this.cachedData.athlete.id = data.key;
-                console.log('Caching Athlete: ', this.cachedData.athlete);
-            });
-        }
-
     }
 
     createAthlete(id: string, username: string) {
@@ -52,7 +43,7 @@ export class AthleteService {
 
     }
 
-    addRecords(_workout) {
+    addRecords(_workout, _id) {
         let _exercises = _workout.exercises;
         console.log('Checking For PR: ', _workout);
         /* Validate athlete records exist, if not create them locally*/
@@ -90,7 +81,7 @@ export class AthleteService {
             }
         }
         /* Send new info to database */
-        this.athletes.child(this.id).child('records').set(this.cachedData.athlete.records);
+        this.athletes.child(_id).child('records').set(this.cachedData.athlete.records);
     }
 
 }

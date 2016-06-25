@@ -43,7 +43,6 @@ export class ComplexService {
             name += complex.movements[i];
         }
         var hash = this.hashCode(name);
-        console.log("Hash Value: ", hash , complex);
         
         /* Look for complex */
         return Observable.create((observer) => {
