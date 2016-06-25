@@ -1,9 +1,11 @@
 .login {
 	text-align: center;
 	margin-top: 100px;
-	background: whitesmoke;
-	opacity: .9;
-	border-radius: 5px;
+	background: rgba(255,255,255,0.8);
+	border-radius: 5px 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	overflow: hidden;
   /* -webkit-filter: blur(2px);
   -moz-filter: blur(2px);
   -o-filter: blur(2px);
@@ -11,7 +13,7 @@
   filter: blur(2px); */
 }
 .title {
-	color: steelgrey;
+	color: #696969;
 }
 .username {
 	border-radius: 5px 5px 0px 0px;
@@ -22,7 +24,11 @@
 
 .createAccount {
 	text-align: center;
-	padding-top: 100px;
+	margin-top: 100px;
+	background: rgba(255,255,255,0.8);
+	border-radius: 5px 5px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .content:before {
@@ -34,7 +40,7 @@
   
   display: block;
   background: url('../../img/cropped-jordan-comp.png') no-repeat fixed center;
-  background-size: 800px 700px;
+  background-size: 200% auto;
   width: 100%;
   height: 100%;
 }
