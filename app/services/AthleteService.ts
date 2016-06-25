@@ -15,9 +15,12 @@ export class AthleteService {
         /* Get Athlete Information, on creation cache athlete info */
     }
 
-    createAthlete(id: string, username: string) {
+    createAthlete(id: string, credentials: any) {
         return this.athletes.child(id).set({
-            username: username
+            name: credentials.name,
+            team: credentials.team,
+            username: credentials.username,
+            id: id
         });
     }
 

@@ -17,7 +17,7 @@ import 'rxjs';
   providers: [AuthService, WorkoutService, ResultService],
   directives: [WorkoutComponent, ResultComponent]
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   public workouts: Workout[];
   public workoutPipe: Observable<Workout[]>;
@@ -29,6 +29,9 @@ export class HomePage {
               public events: Events,
               public result: ResultService) {
     /* Get list of workouts from the workout service */
+  }
+
+  ngOnInit() {
     this.workoutPipe = this.work.getAll();
     this.resultPipe = this.result.getAll();
   }

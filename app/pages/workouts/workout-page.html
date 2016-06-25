@@ -1,1 +1,9 @@
-Workouts Page Under Construction...
+<ion-navbar *navbar>
+  <ion-title>Workouts</ion-title>
+</ion-navbar>
+
+<ion-content>
+<div *ngFor="let workout of workoutPipe | async">
+	<workout [workout]="workout"></workout>
+</div>
+</ion-content>

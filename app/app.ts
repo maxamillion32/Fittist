@@ -23,7 +23,7 @@ firebase.initializeApp(config);
 export class MyApp {
   @ViewChild(NavController) nav;
   
-  rootPage: any = LoginPage;
+  rootPage: any = TabsPage;
 
   constructor(platform: Platform,
               public events: Events) {

@@ -32,7 +32,7 @@ export class LoginPage {
             console.warn('Error Signing In: ', error);
         }).then( (user) => {
             console.log('Register User Data' , user);
-            this.athletes.createAthlete(user.uid, credentials.email);
+            this.athletes.createAthlete(user.uid, credentials);
         });
     }
 

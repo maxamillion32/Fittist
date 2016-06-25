@@ -26,7 +26,7 @@ export class WorkoutService {
                     category: data.category,
                     exercises: data.exercises,
                     resultType: data.resultType,
-                    key: snapshot.key
+                    id: snapshot.key
                 });
                 workouts.push(workout);
                 observer.next(workouts);
