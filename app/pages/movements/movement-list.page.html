@@ -1,0 +1,13 @@
+<ion-content>
+	<div padding class="header">
+		Find Your Movement
+		<ion-input type="text" name="movementName" placeholder="Movement">
+		</ion-input>
+	</div>
+	<ion-list class="searchResults">
+		<ion-item *ngFor="let movement of movementList | async" (click)="moreInfo(movement)">
+			<h3>{{movement.name}}</h3>
+			<ion-icon item-right name="arrow-dropright"></ion-icon>
+		</ion-item>
+	</ion-list>
+</ion-content>

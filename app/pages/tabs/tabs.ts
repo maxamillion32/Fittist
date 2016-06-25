@@ -4,7 +4,7 @@ import {HomePage} from '../home/home';
 import {UserPage} from '../user/user';
 import {WorkoutsPage} from '../workouts/workouts.page';
 import {TeamPage} from '../team/team.page';
-import {MovementPage} from '../movements/movement.page';
+import {MovementListPage} from '../movements/movement-list.page';
 
 @Page({
   templateUrl: 'build/pages/tabs/tabs.html'
@@ -15,7 +15,7 @@ export class TabsPage {
   tab1Root:any = HomePage;
   tab2Root:any = WorkoutsPage;
   tab3Root:any = TeamPage;
-  tab4Root:any = MovementPage;
+  tab4Root:any = MovementListPage;
   tab5Root: any = UserPage;
 
   public showMenu: boolean = false;
