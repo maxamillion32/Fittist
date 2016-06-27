@@ -1,4 +1,4 @@
-import {Page, NavController, Modal, Events, NavParams} from 'ionic-angular';
+import {Page, NavController, Modal, Events, NavParams, Toast} from 'ionic-angular';
 import {Control} from '@angular/common';
 import {Input, OnInit} from '@angular/core';
 import {Workout} from '../../model/workout';
@@ -34,6 +34,7 @@ export class WorkoutForm implements OnInit {
     isSuperSet: boolean = false;
     searchResults: Observable<any>;
     public suggest: boolean = false;
+    public exerciseError: boolean = false;
 
     constructor(private nav: NavController,
                 private movements: MovementService,
@@ -50,12 +51,19 @@ export class WorkoutForm implements OnInit {
             .map((value, index) => {
             /* array with [ search name , values ] */
             var names = [];
+            console.log('value: ' , value)
             if (value[1][0]) {
                 for (var i = 0; i < value[1].length; i++) {
                     if (value[1][i]["name"].toUpperCase().indexOf(value[0].toUpperCase()) >= 0) {
                         names.push(value[1][i]);
                     }
                 }
+            }
+            if (names.length === 0) {
+                /* Throw error if not on list */
+                this.exerciseError = true;
+            } else {
+                this.exerciseError = false;
             }
             console.log(names);
             return names;
@@ -83,28 +91,38 @@ export class WorkoutForm implements OnInit {
     }
 
     addExercise() {
-        /* Add Current Movement to complex */
-        this.complex.movements.push(this.movement.id);
-        /* Add Exercise to the exercise list */
-        // Form has name
-        let addComplex = new Complex({
-            id: '',
-            movements: this.complex.movements,
-            properties: ['reps', 'weight']
-        });
 
-        /* Add Complex */
-        this.complexes.addComplex(addComplex).subscribe((value) => {
-            console.log('Complex Id: ' + value);
-            this.workout.exercises.push({
-                complex: value,
-                properties: { reps: this.reps, weight: this.weight }
+        if (!this.movement.id) {
+            this.exerciseError = true;
+            let toast = Toast.create({
+                message: 'Movement Does Not Exist, Please Select from the drop down menu',
+                duration: 2000
             });
-        });
+            this.nav.present(toast);
+        } else {
+            /* Add Current Movement to complex */
+            this.complex.movements.push(this.movement.id);
+            /* Add Exercise to the exercise list */
+            // Form has name
+            let addComplex = new Complex({
+                id: '',
+                movements: this.complex.movements,
+                properties: ['reps', 'weight']
+            });
 
-        /* Reset Movement */
-        this.movement = new Movement({});
-        this.complex = new Complex({});
+            /* Add Complex */
+            this.complexes.addComplex(addComplex).subscribe((value) => {
+                console.log('Complex Id: ' + value);
+                this.workout.exercises.push({
+                    complex: value,
+                    properties: { reps: this.reps, weight: this.weight }
+                });
+            });
+
+            /* Reset Movement */
+            this.movement = new Movement({});
+            this.complex = new Complex({});
+        }
     }
 
     logWorkout() {
@@ -152,8 +170,9 @@ export class WorkoutForm implements OnInit {
     }
 
     selectMovement(movement) {
-        this.movement = movement;
-        this.suggest = false;
+        /* Validate Movement is from list */
+            this.movement = new Movement(movement);
+            this.suggest = false;
     }
 
     showSuggestions() {

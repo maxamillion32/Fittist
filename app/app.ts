@@ -15,7 +15,7 @@ let config = {
 firebase.initializeApp(config);
 
 @App({
-  template: '<ion-nav [root]="rootPage"></ion-nav>',
+  template: '<ion-nav hide-nav-bar="true" [root]="rootPage"></ion-nav>',
   config: {
     tabbarPlacement: 'bottom'
   } // http://ionicframework.com/docs/v2/api/config/Config/

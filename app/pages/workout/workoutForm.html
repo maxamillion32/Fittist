@@ -30,18 +30,21 @@
                 <ion-label stacked>Exercise Name</ion-label>
                 <ion-input (focus)="showSuggestions()" (blur)="hideSuggestions()" [ngFormControl]="name" type="text" [(ngModel)]="movement.name" value=""></ion-input>
             </ion-item>
+                <div padding *ngIf="exerciseError" class="exerciseError alert alert-danger">
+                    Movement Does Not Exist <br> Please Select from Drop Down
+                </div>
                 <ul class="suggestionList" [hidden]="!suggest">
                     <li *ngFor="let results of searchResults | async" (click)="selectMovement(results)"> {{results.name}}</li>
                 </ul>
             <ion-item>
                 <ion-label stacked>Reps</ion-label>
-                <ion-input type="number" [(ngModel)]="reps"></ion-input>
+                <ion-input type="number" [(ngModel)]="reps" min="1" placeholder="1"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>Weight</ion-label>
-                <ion-input type="number" [(ngModel)]="weight"></ion-input>
+                <ion-input type="number" [(ngModel)]="weight" min="0"></ion-input>
             </ion-item> <!-- <button block (click)="superSet()">Super Set</button> -->
-            <button block (click)="addExercise()">Add Exercise</button>
+            <button block (click)="addExercise()" [disabled]="exerciseError">Add Exercise</button>
         <div padding>
             <p *ngIf="error" class="error">Error:&nbsp;{{ error.code }}</p>
         </div>

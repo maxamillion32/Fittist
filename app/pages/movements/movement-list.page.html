@@ -1,9 +1,10 @@
-<ion-content>
-	<div padding class="header">
-		Find Your Movement
-		<ion-input type="text" name="movementName" placeholder="Movement">
-		</ion-input>
-	</div>
+<ion-navbar *navbar>
+  <ion-title>Movements</ion-title>
+</ion-navbar>
+<ion-content class="movement-list">
+	<ion-item class="searchBar">
+		<ion-searchbar [(ngModel)]="searchQuery" (ionInput)="getMovements($event)"></ion-searchbar>
+	</ion-item>
 	<ion-list class="searchResults">
 		<ion-item *ngFor="let movement of movementList | async" (click)="moreInfo(movement)">
 			<h3>{{movement.name}}</h3>

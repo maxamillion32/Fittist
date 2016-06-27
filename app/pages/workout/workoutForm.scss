@@ -4,7 +4,8 @@
     		-webkit-box-shadow: 1px 5px 5px 0px rgba(0,0,0,0.4);
     		list-style: none;
     		padding: 0px;
-    		max-heigth: 150px;
+    		max-height: 200px;
+            margin-left: 5px;
 	
     		li {
     			padding: 5px;
@@ -19,6 +20,13 @@
     	.hide {
     			display: none;
     	}
+    }
+
+    .exerciseError {
+        background-color: #E0343D;
+        color: white;
+        padding: 10px;
+        margin-left: 15px;
     }
 
 }

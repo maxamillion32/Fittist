@@ -1,4 +1,4 @@
-import {Page, NavController, Modal} from 'ionic-angular';
+import {Page, NavController, NavParams} from 'ionic-angular';
 import {MovementService} from '../../services/MovementService';
 import {Movement} from '../../model/movement';
 import {Observable} from 'rxjs/Observable';
@@ -9,17 +9,16 @@ import {Observable} from 'rxjs/Observable';
 })
 export class MovementDetailsPage {
 
+  public movement: Movement = new Movement({});
+
   constructor(private movements: MovementService,
-  			  private nav: NavController) {}
-
-  ngOnInit() {
-	  this.movementList = this.movements.getAll();
+  			  private nav: NavController,
+          private params: NavParams) {
+    if (params.get('movement')) {
+      this.movement = params.get('movement');
+    }
   }
 
-  moreInfo(movement: Movement) {
-	  let modal = Modal.create(MovementDetailsPage);
 
-
-  }
 
 }
