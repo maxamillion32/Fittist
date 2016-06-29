@@ -14,7 +14,11 @@ export class PercentCalcComponent implements OnChanges{
 
 	public records: any;
 	public complexRecords: any = [];
-	public percentages: any = {};
+	public max: any = {};
+	public percentages: Array<number> = [1,.95,.90,.85];
+	public customWeight: number;
+	public customReps: number;
+	public customPercent: number;
 
 	constructor(private athletes: AthleteService,
 				private auth: AuthService) {
@@ -32,10 +36,10 @@ export class PercentCalcComponent implements OnChanges{
 		}
 	}
 
-	ngOnChanges(complex) {
+	ngOnChanges(input) {
 		/* currentValue, previousValue */
-		console.log('OnChange Event', event);
-		if (complex.currentValue !== complex.previousValue) {
+		console.log('OnChange Event', input);
+		if (input.complex.currentValue !== input.complex.previousValue && !input.complex.isFirstChange()) {
 			this.calculatePrs();
 		}
 		
@@ -44,7 +48,7 @@ export class PercentCalcComponent implements OnChanges{
 	calculatePrs() {
 		// Reset Values
 		this.complexRecords = [];
-		this.percentages = {};
+		this.max = [];
 		let multiplier = 1;
 		let topReps = 21;
 		let weight = 0;
@@ -81,23 +85,23 @@ export class PercentCalcComponent implements OnChanges{
 		// Fill out 2d array
 		console.log('filling array', this.complexRecords);
 		for (var i = 0; i < this.complexRecords.length; i++) {
-			this.percentages[this.complexRecords[i].properties.reps] = {};
-			this.percentages[this.complexRecords[i].properties.reps]['actual'] = this.complexRecords[i].properties.weight;
+			this.max[this.complexRecords[i].properties.reps] = {};
+			this.max[this.complexRecords[i].properties.reps]['actual'] = this.complexRecords[i].properties.weight;
 		}
 
 		// Add Calculated Weights
 		reps.forEach((val, index) => {
-			if (!this.percentages[val]) {
-				this.percentages[val] = {};
+			if (!this.max[val]) {
+				this.max[val] = {};
 			}
-			this.percentages[val]['calculated'] = weight * (factor[index] / multiplier);
+			this.max[val]['calculated'] = weight * (factor[index] / multiplier);
 		});
 
-		console.log(this.percentages);
+		console.log(this.max);
 
 	}
 
 	get diagnostic() {
-		return JSON.stringify(this.percentages);
+		return JSON.stringify(this.max);
 	}
 }
