@@ -1,11 +1,29 @@
-
 <ion-navbar *navbar>
-  <ion-title>
-    User Page
-  </ion-title>
+  <ion-title>User</ion-title>
 </ion-navbar>
 
 <ion-content class="userPage">
+<div padding class="header" (click)="fullProfile()" *ngIf="athlete">
+	<img src="img/molly.jpg" alt="andrew" class="profile-picture">
+	<h3 class="name"> {{athlete.name}} </h3>
+	<h4 class="team"> {{athlete.team}} </h4>
+</div>
+<div class="tabs">
+	<a (click)="logTab()" class="option" [ngClass]="{visiting: log}">LOG</a>
+	<a (click)="recordsTab()" class="option" [ngClass]="{visiting: records}">RECORDS</a>
+</div>
+<div padding class="Log" *ngIf="log">
+	Log
+</div>
+<div padding class="records" *ngIf="records">
+	Personal Records
+	<ion-select [(ngModel)]="selectComplex">
+		<ion-option *ngFor="let complex of complexes | async" value="{{complex.id}}">
+			<complex-movements [complex]=complex></complex-movements>
+		</ion-option>
+	</ion-select>
+	<percentage-calculator [complex]="selectComplex"></percentage-calculator>
+</div>
 <button (click)="logout()">
 	Logout
 </button>

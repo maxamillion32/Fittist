@@ -150,8 +150,7 @@ export class WorkoutForm implements OnInit {
             this.result,
             (new Date())
         );
-
-        console.log("Logging Result: ", result);
+        
         /* Add Result */
         this.results.addResult(result);
 
@@ -161,6 +160,8 @@ export class WorkoutForm implements OnInit {
         this.movement = new Movement({});
         this.complex = new Complex({});
         this.workout = new Workout({});
+
+        console.log("Logging Result: ", result);
 
         this.nav.pop();
     }

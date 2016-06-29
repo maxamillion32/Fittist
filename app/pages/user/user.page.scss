@@ -1,0 +1,48 @@
+.userPage {
+	.header {
+		text-align: center;
+		background: map-get($colors, background);
+		color: white;
+
+		.profile-picture {
+			width: 80px;
+			height: 80px;
+			border-radius: 40px;
+		}
+
+		.name {
+			margin-top: 5px;
+			margin-bottom: 5px;
+		}
+
+		.team {
+			margin-top: 5px;
+			font-size: 14px;
+		}
+
+		.edit {
+
+		}
+	}
+
+	.tabs {
+		display: inline-block;
+		background-color: map-get($colors, background);
+		width: 100%;
+	
+		.option {
+			font-weight: bold;
+			font-size: 14px;
+			color: rgba(255,255,255,.7);
+			text-align: center;
+		    display: inline-block;
+			margin-left: -2px;
+			padding: 10px;
+			width: 50%;
+		}
+		.visiting {
+			color: rgba(255,255,255,1);
+			border-bottom: 3px solid map-get($colors, button);
+		}
+	}
+}

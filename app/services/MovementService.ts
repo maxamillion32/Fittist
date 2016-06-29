@@ -58,6 +58,10 @@ export class MovementService {
     }
 
     getMovement(id: string) {
+        /* Validate */
+        if (id === '') {
+            return '';
+        }
         return this.movements.child(id).once('value');
     }
 

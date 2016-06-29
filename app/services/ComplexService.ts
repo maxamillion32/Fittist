@@ -11,29 +11,29 @@ export class ComplexService {
     }
 
     bootstrap() {
-        /* Create Simple Complexes */
-        let movements = [{name: 'Snatch' , 'type':'Weightlifting', 'verified': true, properties: ['Weight', 'Reps']},
-            {name:'Power Snatch','type':'Weightlifting', 'verified': true, properties: ['Weight', 'Reps']},
-            {name:'Clean', 'type':'Weightlifting', 'verified': true, properties: ['Weight', 'Reps']},
-            {name:'Power Clean', 'type':'Weightlifting', 'verified': true, properties: ['Weight', 'Reps']},
-            {name:'Run', 'type':'Monostructural', 'verified': true, properties: ['Distance']},
-            {name:'Row', 'type':'Monostructural', 'verified': true, properties: ['Distance']},
-            {name:'Deadlift', 'type':'Weightlifting', 'verified': true, properties: ['Weight', 'Reps']},
-            {name:'Wall Balls', 'type':'Monostructural', 'verified': true, properties: ['Weight', 'Reps']},
-            {name:'Back Squat', 'type':'Weightlifting', 'verified': true, properties: ['Weight', 'Reps']},
-            {name:'Front Squat', 'type':'Weightlifting', 'verified': true, properties: ['Weight', 'Reps'] },
-            {name:'Jerk', 'type':'Weightlifting', 'verified': true, properties: ['Weight', 'Reps']},
-            {name:'Handstand Pushup', 'type':'Gymnastics', 'verified': true, properties: 'Reps'},
-            {name:'Pushup', 'type':'Gymnastics', 'verified': true, properties: 'Weight'},
-            {name:'Muscle Up', 'type':'Gymnastics', 'verified': true, properties: 'Weight'}];
 
-        let complexes = [{movements: [movements[0]], properties:['weight' , 'reps']},];
+    }
 
-        for (var i = 0; i < movements.length; i++) {
-            // this.movements.push(movements[i]);
-            this.complex.push({movements: [movements[i]], properties: movements[i].properties});
-        }
+    getAll(): Observable<Complex[]> {
+        /* Streams Workouts one at a time */
+        return Observable.create((observer) => {
+            let complexList: Complex[] = [];
+            let listener = this.complexes.on('child_added', snapshot => {
+                let data = snapshot.val();
+                let movement = new Complex({
+                    name: data.name,
+                    properties: data.properties,
+                    id: snapshot.key,
+                    movements: data.movements
+                });
+                complexList.push(movement);
+                observer.next(complexList);
+            }, observer.error);
 
+            return () => {
+                this.complexes.off('child_added', listener);
+            }
+        });
     }
 
     addComplex(complex: Complex): Observable<string> {

@@ -23,7 +23,7 @@
     }
 
     .exerciseError {
-        background-color: #E0343D;
+        background-color: map-get($colors, error);;
         color: white;
         padding: 10px;
         margin-left: 15px;
