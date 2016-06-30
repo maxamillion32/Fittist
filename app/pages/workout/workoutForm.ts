@@ -126,7 +126,7 @@ export class WorkoutForm implements OnInit {
     }
 
     logWorkout() {
-        console.log("Logging Workout: " , this.workout);
+        console.log("Logging Workout: ", this.workout);
 
         /* Create Workout, Then Log Result */
         let workoutId = this.workout.id;
@@ -137,20 +137,20 @@ export class WorkoutForm implements OnInit {
         }
 
         /* Check For Pr's */
-        
-        console.log('Workout ID: ' , workoutId);
+
+        console.log('Workout ID: ', workoutId);
         let athleteId = this.auth.getAuth().uid;
 
-        console.log('Athlete Id: ' , athleteId);
-        let result = new Result(
-            '',
-            this.workout.name,
-            athleteId,
-            workoutId,
-            this.result,
-            (new Date())
-        );
-        
+        console.log('Athlete Id: ', athleteId);
+        let result = new Result({
+            id: '',
+            name: this.workout.name,
+            athleteId: athleteId,
+            workoutId: workoutId,
+            result: this.result,
+            completionDate: (new Date())
+        });
+
         /* Add Result */
         this.results.addResult(result);
 

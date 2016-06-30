@@ -1,34 +1,62 @@
-Percentage Calculator Component
-<table *ngIf="max['1']">
-	<tr>
-		<th>Reps</th>
-		<th>1</th>
-		<th>3</th>
-		<th>5</th>
-		<th>10</th>
-		<th>20</th>
-	</tr>
-	<tr *ngFor="let percent of percentages">
-		<td>{{percent | percent}}</td>
-		<td>
-			<div *ngIf="max['1'].actual" class="actual">{{max['1'].actual * percent | number}}</div>
-		 	<div class="calculated">{{max['1'].calculated * percent | number}}</div>
-		</td>
-		<td>
-			<div *ngIf="max['3'].actual" class="actual">{{max['3'].actual * percent | number}}</div>
-		 	<div class="calculated">{{max['3'].calculated * percent | number}}</div>
-		</td>
-		<td>
-			<div *ngIf="max['5'].actual" class="actual">{{max['5'].actual * percent | number}}</div>
-		 	<div class="calculated">{{max['5'].calculated * percent | number}}</div>
-		</td>
-		<td>
-			<div *ngIf="max['10'].actual" class="actual">{{max['10'].actual * percent | number}}</div>
-		 	<div class="calculated">{{max['10'].calculated * percent | number}}</div>
-		</td>
-		<td>
-			<div *ngIf="max['20'].actual" class="actual">{{max['20'].actual * percent | number}}</div>
-		 	<div class="calculated">{{max['20'].calculated * percent | number}}</div>
-		</td>
-	</tr>
-</table>
+<div class="percent-calculator">
+	<ion-item class="options">
+		<ion-label>Custom Percent</ion-label>
+		<ion-input [(ngModel)]="customPercent" placeholder="83" type="number"></ion-input>
+	</ion-item>
+	<table *ngIf="max['1']">
+		<tr>
+			<th>Reps</th>
+			<th>1</th>
+			<th>3</th>
+			<th>5</th>
+			<th>10</th>
+			<th>20</th>
+		</tr>
+		<tr *ngIf="customPercent > 0">
+			<td>{{customPercent}}%</td>
+			<td>
+				<div *ngIf="max['1'].actual" class="actual">{{(max['1'].actual * customPercent * .01) | number:'1.0-0'}}</div>
+			 	<div class="calculated">{{(max['1'].calculated * customPercent * .01) | number:'1.0-0'}}</div>
+			</td>
+			<td>
+				<div *ngIf="max['3'].actual" class="actual">{{(max['3'].actual * customPercent * .01) | number:'1.0-0'}}</div>
+			 	<div class="calculated">{{(max['3'].calculated * customPercent * .01) | number:'1.0-0'}}</div>
+			</td>
+			<td>
+				<div *ngIf="max['5'].actual" class="actual">{{(max['5'].actual * customPercent * .01) | number:'1.0-0'}}</div>
+			 	<div class="calculated">{{(max['5'].calculated * customPercent * .01) | number:'1.0-0'}}</div>
+			</td>
+			<td>
+				<div *ngIf="max['10'].actual" class="actual">{{(max['10'].actual * customPercent * .01) | number:'1.0-0'}}</div>
+			 	<div class="calculated">{{(max['10'].calculated * customPercent * .01) | number:'1.0-0'}}</div>
+			</td>
+			<td>
+				<div *ngIf="max['20'].actual" class="actual">{{(max['20'].actual * customPercent * .01) | number:'1.0-0'}}</div>
+			 	<div class="calculated">{{(max['20'].calculated * customPercent * .01) | number:'1.0-0'}}</div>
+			</td>
+		</tr>
+		<tr *ngFor="let percent of percentages">
+			<td>{{percent | percent}}</td>
+			<td>
+				<div *ngIf="max['1'].actual" class="actual">{{max['1'].actual * percent | number:'1.0-0'}}</div>
+			 	<div class="calculated">{{max['1'].calculated * percent | number:'1.0-0'}}</div>
+			</td>
+			<td>
+				<div *ngIf="max['3'].actual" class="actual">{{max['3'].actual * percent | number:'1.0-0'}}</div>
+			 	<div class="calculated">{{max['3'].calculated * percent | number:'1.0-0'}}</div>
+			</td>
+			<td>
+				<div *ngIf="max['5'].actual" class="actual">{{max['5'].actual * percent | number:'1.0-0'}}</div>
+			 	<div class="calculated">{{max['5'].calculated * percent | number:'1.0-0'}}</div>
+			</td>
+			<td>
+				<div *ngIf="max['10'].actual" class="actual">{{max['10'].actual * percent | number:'1.0-0'}}</div>
+			 	<div class="calculated">{{max['10'].calculated * percent | number:'1.0-0'}}</div>
+			</td>
+			<td>
+				<div *ngIf="max['20'].actual" class="actual">{{max['20'].actual * percent | number:'1.0-0'}}</div>
+			 	<div class="calculated">{{max['20'].calculated * percent | number:'1.0-0'}}</div>
+			</td>
+		</tr>
+	</table>
+</div>

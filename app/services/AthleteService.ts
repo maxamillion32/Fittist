@@ -48,7 +48,13 @@ export class AthleteService {
     }
 
     getRecords(_id) {
-        return this.athletes.child(_id).child('records').once('value');
+        /* TODO: Change to Observable */
+        return Observable.create((observer) => {
+            this.athletes.child(_id).child('records').on('value', snapshot => {
+                let records = snapshot.val();
+                observer.next(records);
+            }, observer.error);
+        });
     }
 
     addRecords(_workout, _id) {

@@ -40,14 +40,14 @@ export class ResultService {
             let listener = this.resultsRef.orderByKey().on('child_added', snapshot => {
                 console.log('Recieved Result from service');
                 let data = snapshot.val();
-                let result = new Result(
-                    snapshot.key,
-                    data.name,
-                    data.athleteId,
-                    data.workoutId,
-                    data.result,
-                    ''
-                );
+                let result = new Result({
+                    id: snapshot.key,
+                    name: data.name,
+                    athleteId: data.athleteId,
+                    workoutId: data.workoutId,
+                    result: data.result,
+                    completionDate: data.completionDate
+                });
                 
                 results.push(result);
                 observer.next(results);
@@ -59,6 +59,19 @@ export class ResultService {
 
         });
 
+    }
+
+    getLimited(limit): Observable<Result[]> {
+        return Observable.create( (observer) => {
+            let results: Result[] = [];
+
+            let listener = this.resultsRef.orderByKey().limitToLast(limit).on('child_added', snapshot => {
+                // Reverse the order, latest results first
+                results.unshift(snapshot.val());
+                console.log(results);
+                observer.next(results);
+            }, observer.error);
+        })
     }
 
     getWorkouts() {

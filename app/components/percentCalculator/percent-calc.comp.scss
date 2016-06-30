@@ -1,3 +1,31 @@
-.calculator {
-	
+.percent-calculator {
+	margin-left: -10px;
+	margin-right: -10px;
+
+	table {
+		width: 100%;
+		max-width: 100%;
+		overflow: scroll;
+		text-align: center;
+		tr {
+			border-bottom: 1px solid black;
+			td {
+				padding: 5px;
+			}
+			th {
+				background-color: map-get($colors, background);
+				color: white;
+				padding: 8px;
+				font-size: 1.2em;
+			}
+		}
+
+		.actual {
+			font-size: 1.2em;
+		}
+		.calculated {
+			font-size: 1.2em;
+			color: map-get($colors, title);
+		}
+	}
 }

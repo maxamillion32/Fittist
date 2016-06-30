@@ -34,6 +34,7 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.workoutPipe = this.work.getAll();
     this.resultPipe = this.result.getAll();
+    this.resultPipe = this.result.getLimited(10);
   }
 
   get diagnostic() {

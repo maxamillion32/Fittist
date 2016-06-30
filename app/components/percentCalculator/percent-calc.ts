@@ -3,11 +3,14 @@ import {Workout} from '../../model/workout';
 import {AthleteService} from '../../services/AthleteService';
 import {AuthService} from '../../services/AuthService';
 import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
+import {IntegerPipe} from '../../pipes/integer.pipe';
 
 @Component({
 	selector: 'percentage-calculator',
 	templateUrl: 'build/components/percentCalculator/percent-calc.comp.html',
-	providers: [AthleteService, AuthService]
+	providers: [AthleteService, AuthService],
+	pipes: [IntegerPipe]
 })
 export class PercentCalcComponent implements OnChanges{
 	@Input() complex: any;
@@ -15,7 +18,7 @@ export class PercentCalcComponent implements OnChanges{
 	public records: any;
 	public complexRecords: any = [];
 	public max: any = {};
-	public percentages: Array<number> = [1,.95,.90,.85];
+	public percentages: Array<number> = [1,.95,.90,.85, .8,.75, .7, .65];
 	public customWeight: number;
 	public customReps: number;
 	public customPercent: number;
@@ -28,9 +31,10 @@ export class PercentCalcComponent implements OnChanges{
 		console.log('complex', this.complex);
 		if (this.complex !== undefined) {
 			/* Find Personal Records */
-			this.athletes.getRecords(this.auth.id).then((data) => {
-				this.records = data.val();
-				console.log('Records Recieved');
+			/* Change to Observable, push new records to records */
+			this.athletes.getRecords(this.auth.id).subscribe((data) => {
+				this.records = data;
+				console.log('Records Recieved', this.records);
 				this.calculatePrs();
 			});
 		}
