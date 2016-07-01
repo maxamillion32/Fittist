@@ -13,6 +13,7 @@ import {ResultService} from '../../services/ResultService';
 import {AuthService} from '../../services/AuthService';
 import {Observable} from 'rxjs/Observable';
 import {ExerciseComponent} from '../../components/exercise/exercise.comp';
+import {ResultType} from '../../model/result-type.enum';
 import 'rxjs';
 
 @Page({
@@ -29,7 +30,7 @@ export class WorkoutForm implements OnInit {
     public weight = 0;
     public complex: Complex = new Complex();
     public movement: Movement = new Movement();
-    public result: any;
+    public result: string = 'Complete';
     public movementInput = '';
     isSuperSet: boolean = false;
     searchResults: Observable<any>;
@@ -44,7 +45,8 @@ export class WorkoutForm implements OnInit {
                 private results: ResultService,
                 private auth: AuthService,
                 private params: NavParams) {
-        console.log('Add a workout');
+        console.log('Add a workout', this.result);
+
         /* Code for autocomplete */
         this.name = new Control();
         this.searchResults = this.name.valueChanges
@@ -128,6 +130,7 @@ export class WorkoutForm implements OnInit {
 
     logWorkout() {
         console.log("Logging Workout: ", this.workout);
+        this.workout.resultType = ResultType.Complete;
 
         /* Create Workout, Then Log Result */
         let workoutId = this.workout.id;
@@ -142,18 +145,20 @@ export class WorkoutForm implements OnInit {
         console.log('Workout ID: ', workoutId);
         let athleteId = this.auth.getAuth().uid;
 
-        console.log('Athlete Id: ', athleteId);
-        let result = new Result({
+        console.log('Athlete Id: ', athleteId , this.result);
+        let tmpResult = new Result({
             id: '',
             name: this.workout.name,
             athleteId: athleteId,
             workoutId: workoutId,
             result: this.result,
-            completionDate: (new Date())
+            completionDate: Date.now()
         });
 
+        console.log('tmpResult' , tmpResult);
+
         /* Add Result */
-        this.results.addResult(result);
+        this.results.addResult(tmpResult);
 
         this.athletes.addRecords(this.workout, athleteId);
 
@@ -162,7 +167,7 @@ export class WorkoutForm implements OnInit {
         this.complex = new Complex({});
         this.workout = new Workout({});
 
-        console.log("Logging Result: ", result);
+        console.log("Logging Result: ", tmpResult);
 
         this.nav.pop();
     }

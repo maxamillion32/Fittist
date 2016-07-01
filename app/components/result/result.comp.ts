@@ -10,6 +10,7 @@ import {MovementService} from '../../services/MovementService';
 import {AuthService} from '../../services/AuthService';
 import {ExerciseComponent} from '../exercise/exercise.comp';
 import {WorkoutForm} from '../../pages/workout/workoutForm';
+import {ResultType} from '../../model/result-type.enum';
 
 @Component({
 	selector: 'result',
@@ -19,7 +20,7 @@ import {WorkoutForm} from '../../pages/workout/workoutForm';
 })
 export class ResultComponent implements OnInit{
 	@Input()
-	result: any;
+	result: any = {};
 	athlete: Athlete;
 	workout: any;
 

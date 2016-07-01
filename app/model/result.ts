@@ -12,7 +12,7 @@ export class Result {
 		this.name = obj && obj.name || '';
 		this.athleteId = obj && obj.athleteId || '';
 		this.workoutId = obj && obj.workoutId || '';
-		this.result = obj & obj.result || 0;
+		this.result = obj && obj.result || 0;
 		this.completionDate = obj && obj.completionDate || '';
 	}
 }

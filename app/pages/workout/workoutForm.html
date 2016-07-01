@@ -15,10 +15,13 @@
             <ion-list>
                 <div *ngFor="let exercises of workout.exercises"><exercise [exercise]="exercises"></exercise></div>
             </ion-list>
+        <!-- Locked Down Result Type for Beta -->
+        <!-- 
         <ion-item>
             <ion-label>Result</ion-label>
             <ion-input [(ngModel)]="result" type="text"></ion-input>
         </ion-item>
+        -->
         <div padding>   
             <button block (click)="logWorkout()">Complete Workout</button>
         </div>

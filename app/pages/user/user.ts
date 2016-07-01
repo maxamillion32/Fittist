@@ -4,16 +4,19 @@ import {AuthService} from '../../services/AuthService';
 import {AthleteService} from '../../services/AthleteService';
 import {Workout} from '../../model/workout';
 import {Athlete} from '../../model/athlete';
+import {Result} from '../../model/result';
 import {Observable} from 'rxjs/Observable';
 import {PercentCalcComponent} from '../../components/percentCalculator/percent-calc';
 import {ComplexMovementsComponent} from '../../components/complex/complex-movements.comp';
 import {Complex} from '../../model/complex';
 import {ComplexService} from '../../services/ComplexService';
+import {ResultService} from '../../services/ResultService';
+import {ResultComponent} from '../../components/result/result.comp';
 
 @Page({
   templateUrl: 'build/pages/user/user.html',
-  providers: [AuthService, AthleteService, ComplexService],
-  directives: [PercentCalcComponent, ComplexMovementsComponent]
+  providers: [AuthService, AthleteService, ComplexService, ResultService],
+  directives: [PercentCalcComponent, ComplexMovementsComponent, ResultComponent]
 })
 export class UserPage implements OnInit {
 
@@ -23,11 +26,14 @@ export class UserPage implements OnInit {
   public complexes: Observable<Complex[]>;
   /* Set Default Value */
   public selectComplex: string = '1174595709';
+  public resultPipe: Observable<Result[]>;
 
   constructor(private auth: AuthService,
               private athletes: AthleteService,
-              private complexService: ComplexService) {
+              private complexService: ComplexService,
+              private results: ResultService) {
     this.complexes = this.complexService.getAll();
+    this.resultPipe = this.results.getByAthlete(this.auth.id);
   }
 
   ngOnInit() {

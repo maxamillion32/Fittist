@@ -13,7 +13,9 @@
 	<a (click)="recordsTab()" class="option" [ngClass]="{visiting: records}">RECORDS</a>
 </div>
 <div padding class="Log" *ngIf="log">
-	Log
+	<div *ngFor="let result of resultPipe | async">
+		<result [result]="result"></result>
+	</div>
 </div>
 <div padding class="records" *ngIf="records">
 	Personal Records

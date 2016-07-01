@@ -74,13 +74,14 @@ export class AthleteService {
                         if (_exercises[i].complex === records[j].complex &&
                             _exercises[i].properties.reps === records[j].properties.reps) {
                             found = true;
-                            console.log('Found Complex');
+                            console.log('Found Complex', records[j] , _exercises[i]);
                             // TODO: Find specific overwritting property
-                            if (_exercises[i].properties.weight > records[j].properties.weight) {
+                            // Force to Numbers
+                            if (Math.round(_exercises[i].properties.weight) > Math.round(records[j].properties.weight)) {
                                 //
                                 records[j] = _exercises[i];
                                 this.showToast('New PR!');
-                                console.log('Overwrite PR!');
+                                console.log('Overwrite PR!', records[j]);
                             }
                         }
                     }

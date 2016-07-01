@@ -3,21 +3,24 @@
 		<ion-avatar item-left>
 			<img src="img/molly.jpg" alt="andrew">
 		</ion-avatar>
-		<ion-item center>
-			<h2 class="card-title">
+		<ion-item item-center>
+		    <h2 class="card-title">
 				{{athlete.name}}
 			</h2>
 			<h4>
 				{{athlete.team}}
 			</h4>
-		</ion-item>
+			<h4>
+				{{result.completionDate | date}}
+			</h4>
+		</ion-item>	
 	</ion-item>
 	<!-- Workout Details Here -->
 	<ion-list inset *ngIf="workout">
 		<ion-item> 
 			<h2>{{workout.name}}</h2>
-			<h2> {{workout.resultType}}</h2>
-			<h2 item-right padding-right> {{result.result}}s </h2>
+			<!-- <h2> {{workout.resultType}}</h2> -->
+			<h2 item-right padding-right> {{result.result}} </h2>
 			<ion-icon item-right name="arrow-down"> </ion-icon> 
 		</ion-item>
 			<div *ngFor="let exercises of workout.exercises">

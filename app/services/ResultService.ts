@@ -62,16 +62,29 @@ export class ResultService {
     }
 
     getLimited(limit): Observable<Result[]> {
-        return Observable.create( (observer) => {
+        return Observable.create((observer) => {
             let results: Result[] = [];
 
             let listener = this.resultsRef.orderByKey().limitToLast(limit).on('child_added', snapshot => {
                 // Reverse the order, latest results first
                 results.unshift(snapshot.val());
-                console.log(results);
                 observer.next(results);
             }, observer.error);
-        })
+        });
+    }
+
+    getByAthlete(athleteId): Observable<Result[]> {
+        return Observable.create((observer) => {
+            let results: Result[] = [];
+            let listener = this.resultsRef
+                .orderByChild('athleteId')
+                .equalTo(athleteId)
+                .limitToLast(10)
+                .on('child_added', snapshot => {
+                    results.unshift(snapshot.val());
+                    observer.next(results);
+                }, observer.error);
+        });
     }
 
     getWorkouts() {
@@ -79,10 +92,8 @@ export class ResultService {
     }
 
     addResult(result: Result) {
+        console.log('addResult', result);
         /* Because of the date, there are no duplicates */
-        if (result.completionDate === '') {
-            result.completionDate = new Date();
-        }
         return this.resultsRef.push(result);
         /* After adding result, see if there are any pr's for the athlete on the workout, and on the exercises within */
     }
