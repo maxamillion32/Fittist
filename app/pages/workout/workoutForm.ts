@@ -44,6 +44,7 @@ export class WorkoutForm implements OnInit {
                 private results: ResultService,
                 private auth: AuthService,
                 private params: NavParams) {
+        console.log('Add a workout');
         /* Code for autocomplete */
         this.name = new Control();
         this.searchResults = this.name.valueChanges
@@ -172,6 +173,7 @@ export class WorkoutForm implements OnInit {
 
     selectMovement(movement) {
         /* Validate Movement is from list */
+            console.log('Select Movement' , movement);
             this.movement = new Movement(movement);
             this.suggest = false;
     }
@@ -185,6 +187,6 @@ export class WorkoutForm implements OnInit {
         /* Let select movement happen before removing the list */
         setTimeout(() => {
                      this.suggest = false;
-        }, 200);
+        }, 300);
     }
 }

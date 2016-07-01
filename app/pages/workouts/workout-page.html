@@ -1,3 +1,6 @@
+<ion-navbar *navbar>
+    <ion-title>Leaderboard</ion-title>
+</ion-navbar>
 <ion-content>
 <div *ngFor="let workout of workoutPipe | async">
 	<workout [workout]="workout"></workout>

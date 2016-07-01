@@ -65,8 +65,6 @@ export class AthleteService {
             let records = [];
             if (data.val()) {
                 records = data.val();
-                console.log(data.val(), 'records');
-                console.log('athlete exits');
                 let found = false;
                 // Sort through exercises, see if the properties are different / better 
                 for (var i = 0; i < _exercises.length; i++) {

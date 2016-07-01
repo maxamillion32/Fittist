@@ -45,7 +45,7 @@ export class MyApp {
     let modal = Modal.create(LoginPage);
 
     firebase.auth().onAuthStateChanged((user) => {
-      console.log('Auth State Changed: ', user);
+      console.log('Auth State Changed: ');
       if (null !== user) {
         this.rootPage = TabsPage;
       } else if (this.rootPage === TabsPage ) {

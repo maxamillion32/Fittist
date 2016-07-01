@@ -33,9 +33,8 @@ export class UserPage implements OnInit {
   ngOnInit() {
     
     console.log('init');
-    this.athletes.getAthlete(this.auth.getAuth().uid).subscribe((data) => {
+    this.athletes.getAthlete(this.auth.id).subscribe((data) => {
       this.athlete = data;
-      console.log('seting athlete', data);
     });
     
   }

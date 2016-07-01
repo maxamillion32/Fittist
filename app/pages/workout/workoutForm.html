@@ -28,7 +28,7 @@
         </ion-list>
             <ion-item>
                 <ion-label stacked>Exercise Name</ion-label>
-                <ion-input (focus)="showSuggestions()" (blur)="hideSuggestions()" [ngFormControl]="name" type="text" [(ngModel)]="movement.name" value=""></ion-input>
+                <ion-input (focus)="showSuggestions()" [ngFormControl]="name" type="text" [(ngModel)]="movement.name" value=""></ion-input>
             </ion-item>
                 <div padding *ngIf="exerciseError" class="exerciseError alert alert-danger">
                     Movement Does Not Exist <br> Please Select from Drop Down

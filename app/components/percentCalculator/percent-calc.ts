@@ -28,13 +28,12 @@ export class PercentCalcComponent implements OnChanges{
 	}
 
 	ngOnInit() {
-		console.log('complex', this.complex);
+		console.log('complex');
 		if (this.complex !== undefined) {
 			/* Find Personal Records */
 			/* Change to Observable, push new records to records */
 			this.athletes.getRecords(this.auth.id).subscribe((data) => {
 				this.records = data;
-				console.log('Records Recieved', this.records);
 				this.calculatePrs();
 			});
 		}
@@ -42,7 +41,6 @@ export class PercentCalcComponent implements OnChanges{
 
 	ngOnChanges(input) {
 		/* currentValue, previousValue */
-		console.log('OnChange Event', input);
 		if (input.complex.currentValue !== input.complex.previousValue && !input.complex.isFirstChange()) {
 			this.calculatePrs();
 		}
@@ -87,7 +85,7 @@ export class PercentCalcComponent implements OnChanges{
 		}
 		
 		// Fill out 2d array
-		console.log('filling array', this.complexRecords);
+		console.log('filling array');
 		for (var i = 0; i < this.complexRecords.length; i++) {
 			this.max[this.complexRecords[i].properties.reps] = {};
 			this.max[this.complexRecords[i].properties.reps]['actual'] = this.complexRecords[i].properties.weight;
@@ -101,11 +99,6 @@ export class PercentCalcComponent implements OnChanges{
 			this.max[val]['calculated'] = weight * (factor[index] / multiplier);
 		});
 
-		console.log(this.max);
-
 	}
 
-	get diagnostic() {
-		return JSON.stringify(this.max);
-	}
 }

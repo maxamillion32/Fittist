@@ -18,18 +18,14 @@ export class ComplexMovementsComponent {
 	}
 
 	ngOnInit() {
-		console.log('Complex Movements' , this.complex.movements)
 			for (var i = 0; i < this.complex.movements.length;i++) {
 				if (this.complex.movements[i]) {
 					this.moves.getMovement(this.complex.movements[i]).then((data) => {
-						console.log('Movement Data', data);
+						console.log('Movement Data');
 						this.movements.push(data.val());
 					});
 				}
 			}
 	}
 
-	get diagnostic() {
-		return JSON.stringify(this.complex);
-	}
 }

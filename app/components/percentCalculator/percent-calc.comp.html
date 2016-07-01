@@ -12,7 +12,7 @@
 			<th>10</th>
 			<th>20</th>
 		</tr>
-		<tr *ngIf="customPercent > 0">
+		<tr *ngIf="customPercent">
 			<td>{{customPercent}}%</td>
 			<td>
 				<div *ngIf="max['1'].actual" class="actual">{{(max['1'].actual * customPercent * .01) | number:'1.0-0'}}</div>
