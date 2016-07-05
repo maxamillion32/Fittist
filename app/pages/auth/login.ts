@@ -25,6 +25,16 @@ export class LoginPage {
     }
 
     registerUser(credentials, _event) {
+        console.log(credentials);
+        if (!(credentials &&
+             credentials.email &&
+            credentials.password &&
+            credentials.team !== '' &&
+            credentials.name !== '')) {
+            this.error = "Please Include All Fields";
+            return;
+        }
+        /* Validate */
         _event.preventDefault();
 
         this.authService.createUser(credentials).catch((error) => {

@@ -4,11 +4,11 @@
         <h1 class="title">Use Fittist, Get Fitter</h1>
         <form #loginCreds="ngForm" class="login-form">
             <ion-item class="username">
-                <ion-label>Username</ion-label>
+                <ion-label floating>Username</ion-label>
                 <ion-input type="text" ngControl="email"></ion-input>
             </ion-item>
             <ion-item class="password">
-                <ion-label>Password</ion-label>
+                <ion-label floating>Password</ion-label>
                 <ion-input type="password" ngControl="password"></ion-input>
             </ion-item>
 
@@ -26,19 +26,19 @@
         <form #accountCreds="ngForm" class="account-form">
         <h1 class="title">Create an Account</h1>
         <ion-item class="username">
-            <ion-label>Name</ion-label>
+            <ion-label floating>Name</ion-label>
             <ion-input type="text" ngControl="name"></ion-input>
         </ion-item>
-        <ion-item class="username">
-            <ion-label>Team</ion-label>
-            <ion-input type="text" ngControl="name"></ion-input>
+        <ion-item class="team">
+            <ion-label floating>Team</ion-label>
+            <ion-input type="text" ngControl="team"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label>Username</ion-label>
+            <ion-label floating>Email</ion-label>
             <ion-input type="text" ngControl="email"></ion-input>
         </ion-item>
         <ion-item class="password">
-            <ion-label>Password</ion-label>
+            <ion-label floating>Password</ion-label>
             <ion-input type="password" ngControl="password"></ion-input>
         </ion-item>
         <div padding>

@@ -37,7 +37,7 @@ export class ResultComponent implements OnInit{
 			this.workout = snapshot.val();
 			this.workout.id = snapshot.key;
 		});
-		this.athletes.getAthlete(this.auth.getAuth().uid).subscribe((data) => {
+		this.athletes.getAthlete(this.result.athleteId).subscribe(data => {
 			this.athlete = data;
 		});
 	}

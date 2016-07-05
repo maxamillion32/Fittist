@@ -82,6 +82,9 @@ export class ResultService {
                 .limitToLast(10)
                 .on('child_added', snapshot => {
                     results.unshift(snapshot.val());
+                    if (results.length > 10) {
+                        results.splice(10, 1);
+                    }
                     observer.next(results);
                 }, observer.error);
         });

@@ -3,6 +3,9 @@
 		<ion-label>Custom Percent</ion-label>
 		<ion-input [(ngModel)]="customPercent" placeholder="83" type="number"></ion-input>
 	</ion-item>
+	<ion-item *ngIf="error" class="error">
+		{{error}}
+	</ion-item>
 	<table *ngIf="max['1']">
 		<tr>
 			<th>Reps</th>

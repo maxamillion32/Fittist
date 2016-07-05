@@ -20,7 +20,7 @@ export class AthleteService {
         return this.athletes.child(id).set({
             name: credentials.name,
             team: credentials.team,
-            username: credentials.username,
+            email: credentials.email,
             id: id
         });
     }
@@ -62,9 +62,15 @@ export class AthleteService {
         console.log('Checking For PR: ', _workout);
         /* Validate athlete records exist, if not create them locally*/
         this.athletes.child(_id).child('records').once('value').then( (data) => {
+            console.log(data.val(), 'records value');
             let records = [];
-            if (data.val()) {
+            if (!data.val()) {
+                console.log('No Records Set, Initiating Records');
+                records = [];
+            } else {
                 records = data.val();
+            }
+
                 let found = false;
                 // Sort through exercises, see if the properties are different / better 
                 for (var i = 0; i < _exercises.length; i++) {
@@ -92,7 +98,6 @@ export class AthleteService {
                         records.push(_exercises[i]);
                     }
                 }
-            } 
             this.athletes.child(_id).child('records').set(records);
         });
             

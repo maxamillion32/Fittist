@@ -22,6 +22,7 @@ export class PercentCalcComponent implements OnChanges{
 	public customWeight: number;
 	public customReps: number;
 	public customPercent: number;
+	public error: any;
 
 	constructor(private athletes: AthleteService,
 				private auth: AuthService) {
@@ -34,6 +35,7 @@ export class PercentCalcComponent implements OnChanges{
 			/* Change to Observable, push new records to records */
 			this.athletes.getRecords(this.auth.id).subscribe((data) => {
 				this.records = data;
+				console.log('New Records Data');
 				this.calculatePrs();
 			});
 		}
@@ -48,6 +50,13 @@ export class PercentCalcComponent implements OnChanges{
 	}
 
 	calculatePrs() {
+
+		if (!this.records) {
+			this.error = 'No Records, Please Log Workouts';
+			return;
+		} else {
+			this.error = null;
+		}
 		// Reset Values
 		this.complexRecords = [];
 		this.max = [];
