@@ -4,7 +4,7 @@ export class Movement {
 	public properties: Array<string>;
 	public id: string;
 	public verified: boolean;
-
+	public videoUrl: string;
 
 	constructor(obj?: any) {
 		this.name = obj && obj.name || '';
@@ -12,6 +12,7 @@ export class Movement {
 		this.properties = obj && obj.properties || [];
 		this.id = obj && obj.id || '';
 		this.verified = obj && obj.verified || false;
+		this.videoUrl = obj && obj.videoUrl || '';
 	}
 
 	/*

@@ -19,11 +19,11 @@ export class MovementListPage {
 
   ngOnInit() {
 	  this.movementList = this.movements.getAll();
+	  // this.movements.bootstrap();
   }
 
   moreInfo(movement: Movement) {
 	  this.nav.push(MovementDetailsPage, {'movement': movement});
-
   }
 
 }

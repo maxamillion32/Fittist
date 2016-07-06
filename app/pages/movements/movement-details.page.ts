@@ -9,6 +9,7 @@ import {Observable} from 'rxjs/Observable';
 })
 export class MovementDetailsPage {
 
+
   public movement: Movement = new Movement({});
 
   constructor(private movements: MovementService,
@@ -16,6 +17,7 @@ export class MovementDetailsPage {
           private params: NavParams) {
     if (params.get('movement')) {
       this.movement = params.get('movement');
+      console.log('Recieved Movement', this.movement);
     }
   }
 
