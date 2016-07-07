@@ -11,6 +11,7 @@ import {Result} from '../../model/result';
 import {Subscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs';
+import {FirebaseListObservable} from 'angularfire2';
 
 @Page({
   templateUrl: 'build/pages/home/home.html',
@@ -21,7 +22,7 @@ export class HomePage implements OnInit {
 
   public workouts: Workout[];
   public workoutPipe: Observable<Workout[]>;
-  public resultPipe: Observable<Result[]>;
+  public resultPipe: FirebaseListObservable<Result[]>;
 
   constructor(private auth: AuthService,
               private work: WorkoutService,
@@ -33,7 +34,6 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.workoutPipe = this.work.getAll();
-    this.resultPipe = this.result.getAll();
     this.resultPipe = this.result.getLimited(10);
   }
 

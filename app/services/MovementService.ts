@@ -2,17 +2,19 @@ import {Injectable} from '@angular/core';
 import {Events} from 'ionic-angular';
 import {Observable} from 'rxjs/Observable';
 import {Movement} from '../model/movement';
+import {AngularFire, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2';
 
 @Injectable()
 export class MovementService {
     public movements = firebase.database().ref('movements');
 
-    constructor(public events:Events) {
+    constructor(public events:Events,
+                public af: AngularFire) {
     }
 
     bootstrap() {
         /* Create Movements */
-        let movements = [{ name: 'Air Squat', type: 'Monostructural',
+        let bootstrapMovements = [{ name: 'Air Squat', type: 'Monostructural',
                          videoUrl: 'https://www.youtube.com/embed/C_VtOYc6j5c',
                          verified: true },
             {
@@ -41,40 +43,25 @@ export class MovementService {
                 verified: true
             }];
 
-        for (var i = 0; i < movements.length; i++) {
-            this.movements.push(movements[i]);
+        for (var i = 0; i < bootstrapMovements.length; i++) {
+            this.movements.push(bootstrapMovements[i]);
         }
     }
 
-    getAll(): Observable<Movement[]> {
+    getAll(): FirebaseListObservable<Movement[]> {
 
         /* Streams Workouts one at a time */
-        return Observable.create((observer) => {
-            let movementList: Movement[] = [];
-            let listener = this.movements.orderByChild('name').on('child_added', snapshot => {
-                let data = snapshot.val();
-                let movement = new Movement({
-                    name: data.name,
-                    type: data.type,
-                    videoUrl: data.videoUrl,
-                    id: snapshot.key,
-                    verified: data.verified
-                });
-                movementList.push(movement);
-                console.log('MovementList', movementList);
-                observer.next(movementList);
-            }, observer.error);
-
-            return () => {
-                this.movements.on('child_added', listener);
+        return this.af.database.list('/movements', {
+            query: {
+                orderByChild: 'name'
             }
-        });
-
+        })
     }
 
-    getMovement(id: string) {
+    getMovement(id: string): FirebaseObjectObservable<any> {
         /* Validate */
-        return this.movements.child(id).once('value');
+        // return this.movements.child(id).once('value');
+        return this.af.database.object('/movements/' + id, {preserveSnapshot: true});
     }
 
 }

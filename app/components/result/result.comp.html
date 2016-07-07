@@ -5,10 +5,10 @@
 		</ion-avatar>
 		<ion-item item-center>
 		    <h2 class="card-title">
-				{{athlete.name}}
+				{{(athlete | async)?.name}}
 			</h2>
 			<h4>
-				{{athlete.team}}
+				{{(athlete | async)?.team}}
 			</h4>
 			<h4>
 				{{result.completionDate | date}}
@@ -18,7 +18,7 @@
 	<!-- Workout Details Here -->
 	<ion-list inset *ngIf="workout">
 		<ion-item> 
-			<h2>{{workout.name}}</h2>
+			<h2>{{ workout.name}}</h2>
 			<!-- <h2> {{workout.resultType}}</h2> -->
 			<h2 item-right padding-right> {{result.result}} </h2>
 			<ion-icon item-right name="arrow-down"> </ion-icon> 

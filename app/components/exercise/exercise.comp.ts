@@ -22,10 +22,10 @@ export class ExerciseComponent implements OnInit {
 
 	 ngOnInit() {
 		 if (this.exercise.complex) {
-			 this.complexes.getComplex(this.exercise.complex).then((snapshot) => {
+			 this.complexes.getComplex(this.exercise.complex).subscribe((snapshot) => {
 				 this.complex = snapshot.val();
 				 for (var i = 0; i < this.complex.movements.length; i++) {
-					 this.movements.getMovement(this.complex.movements[i]).then((snapshot) => {
+					 this.movements.getMovement(this.complex.movements[i]).subscribe((snapshot) => {
 						 var move = snapshot.val();
 						 this.movementList.push(move);
 					 });

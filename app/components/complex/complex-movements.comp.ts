@@ -20,7 +20,7 @@ export class ComplexMovementsComponent {
 	ngOnInit() {
 			for (var i = 0; i < this.complex.movements.length;i++) {
 				if (this.complex.movements[i]) {
-					this.moves.getMovement(this.complex.movements[i]).then((data) => {
+					this.moves.getMovement(this.complex.movements[i]).subscribe( (data) => {
 						console.log('Movement Data');
 						this.movements.push(data.val());
 					});

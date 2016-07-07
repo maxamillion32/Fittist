@@ -95,7 +95,8 @@ export class WorkoutForm implements OnInit {
 
     addExercise() {
 
-        if (!this.movement.id) {
+        if (!this.movement.$key) {
+            console.log(this.movement.$key);
             this.exerciseError = true;
             let toast = Toast.create({
                 message: 'Movement Does Not Exist, Please Select from the drop down menu',
@@ -104,7 +105,7 @@ export class WorkoutForm implements OnInit {
             this.nav.present(toast);
         } else {
             /* Add Current Movement to complex */
-            this.complex.movements.push(this.movement.id);
+            this.complex.movements.push(this.movement.$key);
             /* Add Exercise to the exercise list */
             // Form has name
             let addComplex = new Complex({
@@ -113,13 +114,9 @@ export class WorkoutForm implements OnInit {
                 properties: ['reps', 'weight']
             });
 
-            /* Add Complex */
-            this.complexes.addComplex(addComplex).subscribe((value) => {
-                console.log('Complex Id: ' + value);
-                this.workout.exercises.push({
-                    complex: value,
-                    properties: { reps: this.reps, weight: this.weight }
-                });
+            this.workout.exercises.push({
+                complex: this.complexes.addComplex(addComplex),
+                properties: { reps: this.reps, weight: this.weight }
             });
 
             /* Reset Movement */
@@ -179,7 +176,7 @@ export class WorkoutForm implements OnInit {
     selectMovement(movement) {
         /* Validate Movement is from list */
             console.log('Select Movement' , movement);
-            this.movement = new Movement(movement);
+            this.movement = movement;
             this.suggest = false;
     }
 

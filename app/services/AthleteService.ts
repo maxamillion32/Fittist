@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Events, Toast, NavController} from 'ionic-angular';
 import {Athlete} from '../model/athlete';
 import {Observable} from 'rxjs/Observable';
+import * as Firebase from 'firebase';
+import {AngularFire, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2';
 
 @Injectable()
 export class AthleteService {
@@ -12,48 +14,34 @@ export class AthleteService {
     public cachedData: any = {};
 
     constructor(public events:Events,
-                private nav: NavController) {
+                private nav: NavController,
+                public af: AngularFire) {
         /* Get Athlete Information, on creation cache athlete info */
     }
 
     createAthlete(id: string, credentials: any) {
-        return this.athletes.child(id).set({
+        return this.af.database.list('/athletes').update(id, {
             name: credentials.name,
             team: credentials.team,
-            email: credentials.email,
-            id: id
+            email: credentials.email
         });
     }
 
     /* Get Athlete Once */
-    getAthlete(id: string): Observable<any> {
-        console.log('getAthlete: ', id);
-        if (this.cachedData.athlete) {
-            return Observable.of(this.cachedData.athlete);
-        } else {
-            return Observable.create( (observer) => {
-                this.athletes.child(id).on('value' , snapshot => {
-                   let athlete = snapshot.val();
-                   athlete.id = snapshot.key;
-                   observer.next(athlete);
-                }, observer.error)
-            }).do( (data) => {
-                this.cachedData.athlete = data;
-            });
-        }
+    getAthlete(id: string): FirebaseObjectObservable<any> {
+        return this.af.database.object('/athletes/' + id);
     }
 
     bootstrap() {
 
     }
 
-    getRecords(_id) {
-        /* TODO: Change to Observable */
-        return Observable.create((observer) => {
-            this.athletes.child(_id).child('records').on('value', snapshot => {
-                let records = snapshot.val();
-                observer.next(records);
-            }, observer.error);
+    getRecords(_id): FirebaseListObservable<any> {
+        return this.af.database.list('/athletes/' + _id + '/records', {
+            query: {
+                orderByKey: true
+            },
+            preserveSnapshot: true
         });
     }
 
@@ -61,7 +49,7 @@ export class AthleteService {
         let _exercises = _workout.exercises;
         console.log('Checking For PR: ', _workout);
         /* Validate athlete records exist, if not create them locally*/
-        this.athletes.child(_id).child('records').once('value').then( (data) => {
+        this.getRecords(_id).subscribe( (data) => {
             console.log(data.val(), 'records value');
             let records = [];
             if (!data.val()) {
@@ -98,7 +86,8 @@ export class AthleteService {
                         records.push(_exercises[i]);
                     }
                 }
-            this.athletes.child(_id).child('records').set(records);
+                this.af.database.list('/athletes/' + _id).update('records', records);
+            // this.athletes.child(_id).child('records').set(records);
         });
             
     }

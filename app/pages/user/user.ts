@@ -12,6 +12,7 @@ import {Complex} from '../../model/complex';
 import {ComplexService} from '../../services/ComplexService';
 import {ResultService} from '../../services/ResultService';
 import {ResultComponent} from '../../components/result/result.comp';
+import {FirebaseListObservable} from 'angularfire2';
 
 @Page({
   templateUrl: 'build/pages/user/user.html',
@@ -26,7 +27,7 @@ export class UserPage implements OnInit {
   public complexes: Observable<Complex[]>;
   /* Set Default Value */
   public selectComplex: string = '1174595709';
-  public resultPipe: Observable<Result[]>;
+  public resultPipe: FirebaseListObservable<Result[]>;
 
   constructor(private auth: AuthService,
               private athletes: AthleteService,

@@ -3,9 +3,10 @@ import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
 import {enableProdMode, ViewChild} from '@angular/core';
 import {LoginPage} from "./pages/auth/login";
+import {FIREBASE_PROVIDERS, defaultFirebase, AngularFire } from 'angularfire2';
 
 enableProdMode();
-let config = {
+/* let config = {
   apiKey: "AIzaSyBwxrtC3SDwiW2sYidYT60eqd2vZWL3BbY",
   authDomain: "popping-inferno-7577.firebaseapp.com",
   databaseURL: "https://popping-inferno-7577.firebaseio.com",
@@ -13,12 +14,21 @@ let config = {
 };
 
 firebase.initializeApp(config);
-
+*/
 @App({
   template: '<ion-nav hide-nav-bar="true" [root]="rootPage"></ion-nav>',
   config: {
     tabbarPlacement: 'bottom'
-  } // http://ionicframework.com/docs/v2/api/config/Config/
+  }, // http://ionicframework.com/docs/v2/api/config/Config/
+  providers: [
+    FIREBASE_PROVIDERS,
+    defaultFirebase({
+      apiKey: "AIzaSyBwxrtC3SDwiW2sYidYT60eqd2vZWL3BbY",
+      authDomain: "popping-inferno-7577.firebaseapp.com",
+      databaseURL: "https://popping-inferno-7577.firebaseio.com",
+      storageBucket: "popping-inferno-7577.appspot.com"
+    })
+  ]
 })
 export class MyApp {
   @ViewChild(NavController) nav;
@@ -26,9 +36,9 @@ export class MyApp {
   rootPage: any = TabsPage;
 
   constructor(platform: Platform,
-              public events: Events) {
+              public events: Events,
+              public af: AngularFire) {
     /* listen for login / logout event, change root page */
-
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -43,12 +53,10 @@ export class MyApp {
 
   listenToLoginEvents() {
     let modal = Modal.create(LoginPage);
-
-    firebase.auth().onAuthStateChanged((user) => {
-      console.log('Auth State Changed: ');
-      if (null !== user) {
+    this.af.auth.subscribe(auth => {
+      if (auth) {
         this.rootPage = TabsPage;
-      } else if (this.rootPage === TabsPage ) {
+      } else {
         this.rootPage = LoginPage;
       }
     });

@@ -11,6 +11,7 @@ import {AuthService} from '../../services/AuthService';
 import {ExerciseComponent} from '../exercise/exercise.comp';
 import {WorkoutForm} from '../../pages/workout/workoutForm';
 import {ResultType} from '../../model/result-type.enum';
+import {FirebaseObjectObservable} from 'angularfire2';
 
 @Component({
 	selector: 'result',
@@ -21,7 +22,7 @@ import {ResultType} from '../../model/result-type.enum';
 export class ResultComponent implements OnInit{
 	@Input()
 	result: any = {};
-	athlete: Athlete;
+	public athlete: FirebaseObjectObservable<any>;
 	workout: any;
 
 	constructor(public workouts: WorkoutService,
@@ -33,13 +34,12 @@ export class ResultComponent implements OnInit{
 	}
 
 	ngOnInit() {
-		this.workouts.getWorkout(this.result.workoutId).then(snapshot => {
+		this.workouts.getWorkout(this.result.workoutId).subscribe(snapshot => {
 			this.workout = snapshot.val();
 			this.workout.id = snapshot.key;
 		});
-		this.athletes.getAthlete(this.result.athleteId).subscribe(data => {
-			this.athlete = data;
-		});
+		this.athlete = this.athletes.getAthlete(this.result.athleteId);
+		console.log(this.athlete);
 	}
 
 	get diagnostic() {
