@@ -1,4 +1,13 @@
 .userPage {
+	.settingsButton {
+		border: 0px;
+		background: transparent;
+		color: white;
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		box-shadow: none;
+	}
 	.header {
 		text-align: center;
 		background: map-get($colors, background);

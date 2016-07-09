@@ -1,35 +1,34 @@
-<ion-navbar *navbar>
-  <ion-title>User</ion-title>
-</ion-navbar>
-
 <ion-content class="userPage">
-<div padding class="header" (click)="fullProfile()" *ngIf="athlete">
-	<img src="img/molly.jpg" alt="andrew" class="profile-picture">
-	<h3 class="name"> {{athlete.name}} </h3>
-	<h4 class="team"> {{athlete.team}} </h4>
-</div>
-<div class="tabs">
-	<a (click)="logTab()" class="option" [ngClass]="{visiting: log}">LOG</a>
-	<a (click)="recordsTab()" class="option" [ngClass]="{visiting: records}">RECORDS</a>
-</div>
-<div padding class="Log" *ngIf="log">
-	<div *ngFor="let result of resultPipe | async">
-		<result [result]="result"></result>
+	<button class="settingsButton" (click)="settings()">
+		<ion-icon name="settings"></ion-icon>
+	</button>
+	<div padding class="header" *ngIf="athlete">
+		<img src="img/molly.jpg" alt="andrew" class="profile-picture">
+		<h3 class="name"> {{athlete.name}} </h3>
+		<h4 class="team"> {{athlete.team}} </h4>
 	</div>
-</div>
-<div padding class="records" *ngIf="records">
-	Personal Records
-	<select [(ngModel)]="selectComplex">
-		<option *ngFor="let complex of complexes | async" value="{{complex.id}}">
-			<complex-movements [complex]=complex></complex-movements>
-		</option>
-	</select>
-	<percentage-calculator [complex]="selectComplex"></percentage-calculator>
-</div>
-<button (click)="logout()">
-	Logout
-</button>
-<div *ngIf="athlete">
-	Hello Athlete {{athlete.name}}
-</div>
+	<div class="tabs">
+		<a (click)="logTab()" class="option" [ngClass]="{visiting: log}">LOG</a>
+		<a (click)="recordsTab()" class="option" [ngClass]="{visiting: records}">RECORDS</a>
+	</div>
+	<div padding class="Log" *ngIf="log">
+		<div *ngFor="let result of resultPipe | async">
+			<result [result]="result"></result>
+		</div>
+	</div>
+	<div padding class="records" *ngIf="records">
+		Personal Records
+		<select [(ngModel)]="selectComplex">
+			<option *ngFor="let complex of complexes | async" value="{{complex.id}}">
+				<complex-movements [complex]=complex></complex-movements>
+			</option>
+		</select>
+		<percentage-calculator [complex]="selectComplex"></percentage-calculator>
+	</div>
+	<button (click)="logout()">
+		Logout
+	</button>
+	<div *ngIf="athlete">
+		Hello Athlete {{athlete.name}}
+	</div>
 </ion-content>

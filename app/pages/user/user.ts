@@ -14,6 +14,7 @@ import {ResultService} from '../../services/ResultService';
 import {ResultComponent} from '../../components/result/result.comp';
 import {FirebaseListObservable} from 'angularfire2';
 import {ReversePipe} from '../../pipes/reverse.pipe';
+import {SettingsPage} from '../settings/settings.page';
 
 @Component({
   templateUrl: 'build/pages/user/user.html',
@@ -34,7 +35,8 @@ export class UserPage implements OnInit {
   constructor(private auth: AuthService,
               private athletes: AthleteService,
               private complexService: ComplexService,
-              private results: ResultService) {
+              private results: ResultService,
+              private nav: NavController) {
     this.complexes = this.complexService.getAll();
     this.resultPipe = this.results.getByAthlete(this.auth.id).map((arr) => { return arr.reverse(); });
   }
@@ -60,6 +62,10 @@ export class UserPage implements OnInit {
   recordsTab() {
     this.log = false;
     this.records = true;
+  }
+
+  settings() {
+    this.nav.push(SettingsPage);
   }
   
 }

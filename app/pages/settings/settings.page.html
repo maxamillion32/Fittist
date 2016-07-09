@@ -1,0 +1,41 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>User Settings</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<ion-list>
+		<ion-list-header>
+			Profile
+		</ion-list-header>
+		<ion-item>
+			Username
+			<ion-note item-right>
+			  {{(athlete | async)?.username}}
+			</ion-note>
+		</ion-item>
+		<ion-item>
+			Name
+			<ion-note item-right>
+			  {{(athlete | async)?.name}}
+			</ion-note>
+		</ion-item>
+		<ion-item>
+			Team
+			<ion-note item-right>
+				{{(athlete | async)?.team}}
+			</ion-note>
+		</ion-item>
+	</ion-list>
+	<ion-list>
+		<ion-list-header>
+			Workout Settings
+		</ion-list-header>
+		<ion-item>
+			Units
+			<ion-note item-right>
+				{{(athlete | async)?.units}}
+			</ion-note>
+		</ion-item>
+	</ion-list>
+</ion-content>
