@@ -49,14 +49,15 @@ export class AthleteService {
         let _exercises = _workout.exercises;
         console.log('Checking For PR: ', _workout);
         /* Validate athlete records exist, if not create them locally*/
-        this.getRecords(_id).subscribe( (data) => {
-            console.log(data.val(), 'records value');
+        this.getRecords(_id).subscribe( (snapshots) => {
             let records = [];
-            if (!data.val()) {
+            if (snapshots.length < 1) {
                 console.log('No Records Set, Initiating Records');
                 records = [];
             } else {
-                records = data.val();
+                snapshots.forEach((snap) => {
+                    records.push(snap.val());
+                });
             }
 
                 let found = false;

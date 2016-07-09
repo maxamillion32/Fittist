@@ -13,11 +13,13 @@ import {ComplexService} from '../../services/ComplexService';
 import {ResultService} from '../../services/ResultService';
 import {ResultComponent} from '../../components/result/result.comp';
 import {FirebaseListObservable} from 'angularfire2';
+import {ReversePipe} from '../../pipes/reverse.pipe';
 
 @Component({
   templateUrl: 'build/pages/user/user.html',
   providers: [AuthService, AthleteService, ComplexService, ResultService],
-  directives: [PercentCalcComponent, ComplexMovementsComponent, ResultComponent]
+  directives: [PercentCalcComponent, ComplexMovementsComponent, ResultComponent],
+  pipes: [ReversePipe]
 })
 export class UserPage implements OnInit {
 
@@ -27,14 +29,14 @@ export class UserPage implements OnInit {
   public complexes: Observable<Complex[]>;
   /* Set Default Value */
   public selectComplex: string = '1174595709';
-  public resultPipe: FirebaseListObservable<Result[]>;
+  public resultPipe: Observable<any>;
 
   constructor(private auth: AuthService,
               private athletes: AthleteService,
               private complexService: ComplexService,
               private results: ResultService) {
     this.complexes = this.complexService.getAll();
-    this.resultPipe = this.results.getByAthlete(this.auth.id);
+    this.resultPipe = this.results.getByAthlete(this.auth.id).map((arr) => { return arr.reverse(); });
   }
 
   ngOnInit() {

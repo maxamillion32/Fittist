@@ -5,11 +5,13 @@ import {AuthService} from '../../services/AuthService';
 import {AthleteService} from '../../services/AthleteService';
 import {Observable} from 'rxjs/Observable';
 import {WorkoutComponent} from '../../components/workout/workout.comp';
+import {ReversePipe} from '../../pipes/reverse.pipe';
 
 @Component({
   templateUrl: 'build/pages/workouts/workout-page.html',
   providers: [AuthService, AthleteService, WorkoutService],
-  directives: [WorkoutComponent]
+  directives: [WorkoutComponent],
+  pipes: [ReversePipe]
 })
 export class WorkoutsPage implements OnInit {
 
@@ -20,7 +22,7 @@ export class WorkoutsPage implements OnInit {
   			private auth: AuthService) {}
 
   ngOnInit() {
-	  this.workoutPipe = this.workouts.getAll();
+	  this.workoutPipe = this.workouts.getAll().map((arr) => { return arr.reverse(); });
   }
 
 }

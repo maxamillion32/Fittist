@@ -2,10 +2,7 @@
   <ion-title>Home</ion-title>
 </ion-navbar>
 <ion-content padding class="home">
-<!-- <div *ngFor="let workout of workoutPipe | async">
-  <workout [workout]="workout"></workout>
-</div> --> 
-<div *ngFor="let result of resultPipe | async">
+<div *ngFor="let result of resultPipe | async ">
 	<result [result]="result"></result>
 </div>
 </ion-content>
