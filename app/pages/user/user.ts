@@ -1,4 +1,4 @@
-import {Page, NavController, Modal, Events} from 'ionic-angular';
+import {NavController, Modal, Events} from 'ionic-angular';
 import {Component, OnInit, Inject} from '@angular/core';
 import {AuthService} from '../../services/AuthService';
 import {AthleteService} from '../../services/AthleteService';
@@ -14,7 +14,7 @@ import {ResultService} from '../../services/ResultService';
 import {ResultComponent} from '../../components/result/result.comp';
 import {FirebaseListObservable} from 'angularfire2';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/user/user.html',
   providers: [AuthService, AthleteService, ComplexService, ResultService],
   directives: [PercentCalcComponent, ComplexMovementsComponent, ResultComponent]

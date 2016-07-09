@@ -1,6 +1,6 @@
-import {Page, NavController, Modal, Events, NavParams, Toast} from 'ionic-angular';
+import {NavController, Modal, Events, NavParams, Toast} from 'ionic-angular';
 import {Control} from '@angular/common';
-import {Input, OnInit} from '@angular/core';
+import {Input, Component, OnInit} from '@angular/core';
 import {Workout} from '../../model/workout';
 import {Complex} from '../../model/complex';
 import {Movement} from '../../model/movement';
@@ -16,7 +16,7 @@ import {ExerciseComponent} from '../../components/exercise/exercise.comp';
 import {ResultType} from '../../model/result-type.enum';
 import 'rxjs';
 
-@Page({
+@Component({
     templateUrl: 'build/pages/workout/workoutForm.html',
     directives: [ExerciseComponent],
     providers:[MovementService, ComplexService, WorkoutService, AthleteService, ResultService, AuthService]

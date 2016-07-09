@@ -1,8 +1,8 @@
-import {Page} from 'ionic-angular';
+import {Component} from '@angular/core';
 import {AngularFire} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/team/team-page.html'
 })
 export class TeamPage {

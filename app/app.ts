@@ -1,7 +1,7 @@
-import {App, Platform, NavController, Modal, Events} from 'ionic-angular';
+import {Platform, ionicBootstrap, NavController, Modal, Events} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
-import {enableProdMode, ViewChild} from '@angular/core';
+import {enableProdMode, ViewChild, Component} from '@angular/core';
 import {LoginPage} from "./pages/auth/login";
 import {FIREBASE_PROVIDERS, defaultFirebase, AngularFire } from 'angularfire2';
 
@@ -15,20 +15,8 @@ enableProdMode();
 
 firebase.initializeApp(config);
 */
-@App({
-  template: '<ion-nav hide-nav-bar="true" [root]="rootPage"></ion-nav>',
-  config: {
-    tabbarPlacement: 'bottom'
-  }, // http://ionicframework.com/docs/v2/api/config/Config/
-  providers: [
-    FIREBASE_PROVIDERS,
-    defaultFirebase({
-      apiKey: "AIzaSyBwxrtC3SDwiW2sYidYT60eqd2vZWL3BbY",
-      authDomain: "popping-inferno-7577.firebaseapp.com",
-      databaseURL: "https://popping-inferno-7577.firebaseio.com",
-      storageBucket: "popping-inferno-7577.appspot.com"
-    })
-  ]
+@Component({
+  template: '<ion-nav hide-nav-bar="true" [root]="rootPage"></ion-nav>'
 })
 export class MyApp {
   @ViewChild(NavController) nav;
@@ -62,3 +50,15 @@ export class MyApp {
     });
   }
 }
+
+ionicBootstrap(MyApp, [
+      FIREBASE_PROVIDERS,
+      defaultFirebase({
+      apiKey: "AIzaSyBwxrtC3SDwiW2sYidYT60eqd2vZWL3BbY",
+      authDomain: "popping-inferno-7577.firebaseapp.com",
+      databaseURL: "https://popping-inferno-7577.firebaseio.com",
+      storageBucket: "popping-inferno-7577.appspot.com"
+      })
+    ], {
+    tabbarPlacement: 'bottom'
+  });

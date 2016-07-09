@@ -1,4 +1,5 @@
-import {Page, NavController, Modal} from 'ionic-angular';
+import { NavController, Modal} from 'ionic-angular';
+import {Component} from '@angular/core';
 import {WorkoutForm} from "../workout/workoutForm";
 import {HomePage} from '../home/home';
 import {UserPage} from '../user/user';
@@ -6,7 +7,7 @@ import {WorkoutsPage} from '../workouts/workouts.page';
 import {TeamPage} from '../team/team.page';
 import {MovementListPage} from '../movements/movement-list.page';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/tabs/tabs.html'
 })
 export class TabsPage {

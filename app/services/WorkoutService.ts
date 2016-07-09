@@ -17,14 +17,12 @@ export class WorkoutService {
     }
 
     getAll(): FirebaseListObservable<Workout[]> {
-
         return this.af.database.list('/workouts', {
             query: {
                 orderByKey: true,
                 limitToLast: 20
             }
         });
-
     }
 
     getWorkout(id: string): FirebaseObjectObservable<any> {

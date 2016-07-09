@@ -15,7 +15,7 @@ import {IntegerPipe} from '../../pipes/integer.pipe';
 export class PercentCalcComponent implements OnChanges{
 	@Input() complex: any;
 
-	public records: any;
+	public records: any = [];
 	public complexRecords: any = [];
 	public max: any = {};
 	public percentages: Array<number> = [1,.95,.90,.85, .8,.75, .7, .65];
@@ -34,8 +34,9 @@ export class PercentCalcComponent implements OnChanges{
 			/* Find Personal Records */
 			/* Change to Observable, push new records to records */
 			this.athletes.getRecords(this.auth.id).subscribe((data) => {
-				this.records = data;
-				console.log('New Records Data');
+				data.forEach(snapshot => {
+					this.records.push(snapshot.val());
+				});
 				this.calculatePrs();
 			});
 		}
@@ -44,6 +45,7 @@ export class PercentCalcComponent implements OnChanges{
 	ngOnChanges(input) {
 		/* currentValue, previousValue */
 		if (input.complex.currentValue !== input.complex.previousValue && !input.complex.isFirstChange()) {
+			console.log('Recalculation');
 			this.calculatePrs();
 		}
 		

@@ -1,5 +1,4 @@
-import {Page} from 'ionic-angular';
-import {OnInit} from '@angular/core';
+import {OnInit, Component} from '@angular/core';
 import {Workout} from '../../model/workout';
 import {WorkoutService} from '../../services/WorkoutService';
 import {AuthService} from '../../services/AuthService';
@@ -7,7 +6,7 @@ import {AthleteService} from '../../services/AthleteService';
 import {Observable} from 'rxjs/Observable';
 import {WorkoutComponent} from '../../components/workout/workout.comp';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/workouts/workout-page.html',
   providers: [AuthService, AthleteService, WorkoutService],
   directives: [WorkoutComponent]

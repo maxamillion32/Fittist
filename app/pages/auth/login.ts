@@ -1,9 +1,10 @@
 import {Page, Events} from 'ionic-angular';
+import {Component} from '@angular/core';
 import {AuthService} from '../../services/AuthService';
 import {AthleteService} from '../../services/AthleteService';
 import {AngularFire, AuthProviders, AuthMethods} from 'angularfire2';
 
-@Page({
+@Component({
     templateUrl: 'build/pages/auth/login.html',
     providers: [AthleteService, AuthService]
 })

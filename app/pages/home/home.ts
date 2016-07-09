@@ -1,4 +1,4 @@
-import {Page, NavController, Modal, Events} from 'ionic-angular';
+import {NavController, Modal, Events} from 'ionic-angular';
 import {LoginPage} from '../auth/login';
 import {Component, OnInit, Inject} from '@angular/core';
 import {AuthService} from '../../services/AuthService';
@@ -13,7 +13,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs';
 import {FirebaseListObservable} from 'angularfire2';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/home/home.html',
   providers: [AuthService, WorkoutService, ResultService],
   directives: [WorkoutComponent, ResultComponent]

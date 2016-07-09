@@ -3,7 +3,7 @@
 		<ion-avatar item-left>
 			<img src="img/molly.jpg" alt="andrew">
 		</ion-avatar>
-		<ion-item item-center>
+		<div>
 		    <h2 class="card-title">
 				{{(athlete | async)?.name}}
 			</h2>
@@ -12,21 +12,19 @@
 			</h4>
 			<h4>
 				{{result.completionDate | date}}
-			</h4>
-		</ion-item>	
+			</h4>  
+		</div>
 	</ion-item>
-	<!-- Workout Details Here -->
-	<ion-list inset *ngIf="workout">
+ 	<ion-list inset *ngIf="workout">
 		<ion-item> 
-			<h2>{{ workout.name}}</h2>
-			<!-- <h2> {{workout.resultType}}</h2> -->
+			<h2>{{workout.name}}</h2>
 			<h2 item-right padding-right> {{result.result}} </h2>
 			<ion-icon item-right name="arrow-down"> </ion-icon> 
 		</ion-item>
 			<div *ngFor="let exercises of workout.exercises">
 				<exercise [exercise]="exercises"></exercise>
-			</div>
-	</ion-list>
+			</div> 
+	</ion-list> 
 	<ion-row>
 		<ion-col>
 			<button clear small (click)="like($event, property)">

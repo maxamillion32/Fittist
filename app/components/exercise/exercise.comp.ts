@@ -18,6 +18,7 @@ export class ExerciseComponent implements OnInit {
 
 	constructor(private complexes: ComplexService,
 				private movements: MovementService) {
+		console.log('exercise');
 	 }
 
 	 ngOnInit() {
