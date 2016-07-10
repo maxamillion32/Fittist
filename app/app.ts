@@ -47,8 +47,8 @@ export class MyApp {
       } else {
         this.rootPage = LoginPage;
       }
-    });
-  }
+     }); 
+   }
 }
 
 ionicBootstrap(MyApp, [
