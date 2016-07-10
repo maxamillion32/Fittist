@@ -9,22 +9,19 @@
 			Profile
 		</ion-list-header>
 		<ion-item>
-			Username
-			<ion-note item-right>
-			  {{(athlete | async)?.username}}
-			</ion-note>
+			<ion-label>Username</ion-label>
+			<ion-input disabled value="{{(athlete | async)?.username}}">
+			</ion-input>
 		</ion-item>
 		<ion-item>
-			Name
-			<ion-note item-right>
-			  {{(athlete | async)?.name}}
-			</ion-note>
+			<ion-label>Team</ion-label>
+			<ion-input [(ngModel)]="athlete.name" value="{{(athlete | async)?.name}}" (blur)="updateName()">
+			</ion-input>
 		</ion-item>
 		<ion-item>
-			Team
-			<ion-note item-right>
-				{{(athlete | async)?.team}}
-			</ion-note>
+			<ion-label>Team</ion-label>
+			<ion-input [(ngModel)]="athlete.team" value="{{(athlete | async)?.team}}" (blur)="updateTeam()">
+			</ion-input>
 		</ion-item>
 	</ion-list>
 	<ion-list>
@@ -32,10 +29,11 @@
 			Workout Settings
 		</ion-list-header>
 		<ion-item>
-			Units
-			<ion-note item-right>
-				{{(athlete | async)?.units}}
-			</ion-note>
+			<ion-label>Units</ion-label>
+			<ion-select [(ngModel)]="athlete.units" (ionChange)="changeUnits()">
+				<ion-option value="Imperial" checked="true">Imperial</ion-option>
+				<ion-option value="Metric">Metric</ion-option>
+			</ion-select>
 		</ion-item>
 	</ion-list>
 </ion-content>

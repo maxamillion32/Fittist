@@ -27,6 +27,10 @@ export class AthleteService {
         });
     }
 
+    update(_id, updates) {
+        this.athletes.child(_id).update(updates);
+    }
+
     /* Get Athlete Once */
     getAthlete(id: string): FirebaseObjectObservable<any> {
         return this.af.database.object('/athletes/' + id);
