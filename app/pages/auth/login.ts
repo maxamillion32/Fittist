@@ -51,6 +51,12 @@ export class LoginPage {
        
     }
 
+    facebookLogin() {
+        this.authService.loginWithFacebook().then(result => {
+            console.log('Redirect Result: ', result);
+        });
+    }
+
     create(_event) {
         _event.preventDefault();
         console.log('Create Button');

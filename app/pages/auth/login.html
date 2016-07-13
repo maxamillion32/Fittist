@@ -1,53 +1,15 @@
-
-<ion-content class="content">
-    <div padding class="login" *ngIf="!createAccount">
-        <h1 class="title">Use Fittist, Get Fitter</h1>
-        <form #loginCreds="ngForm" class="login-form">
-            <ion-item class="username">
-                <ion-label floating>Username</ion-label>
-                <ion-input type="text" ngControl="email"></ion-input>
-            </ion-item>
-            <ion-item class="password">
-                <ion-label floating>Password</ion-label>
-                <ion-input type="password" ngControl="password"></ion-input>
-            </ion-item>
-
-            <div padding class="login-button">
-                <button block (click)="login(loginCreds.value, $event)">Login</button>
-                <p>Don't have an account already? </p>
-                <button block (click)="create($event)">Create Account</button>
-            </div>
-            <div padding>
-                <p *ngIf="error" class="error">Error:&nbsp;{{ error.code }}</p>
-            </div>
-        </form>
-    </div>
-    <div padding class="createAccount" *ngIf="createAccount">
-        <form #accountCreds="ngForm" class="account-form">
-        <h1 class="title">Create an Account</h1>
-        <ion-item class="username">
-            <ion-label floating>Name</ion-label>
-            <ion-input type="text" ngControl="name"></ion-input>
-        </ion-item>
-        <ion-item class="team">
-            <ion-label floating>Team</ion-label>
-            <ion-input type="text" ngControl="team"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label floating>Email</ion-label>
-            <ion-input type="text" ngControl="email"></ion-input>
-        </ion-item>
-        <ion-item class="password">
-            <ion-label floating>Password</ion-label>
-            <ion-input type="password" ngControl="password"></ion-input>
-        </ion-item>
-        <div padding>
-        <button block (click)="registerUser(accountCreds.value, $event)">Create Account
+<ion-content class="login-page">
+    <h1 class="title"> Fittist </h1>
+    <div class="facebook">
+        <button (click)="facebookLogin()">
+            <ion-icon name="facebook" class="buttonIcon"></ion-icon>
+            Login With Facebook
         </button>
-        </div>
-        <div padding>
-            <p *ngIf="error" class="error">Error:&nbsp;{{ error.code }}</p>
-        </div>
-        </form>
+    </div>
+    <div class="email">
+        <button (click)="emailLogin()">
+            <ion-icon name="mail" class="buttonIcon"></ion-icon>
+            Login With Email
+        </button>
     </div>
 </ion-content>

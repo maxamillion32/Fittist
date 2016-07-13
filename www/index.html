@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
+  <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
 
   <link ios-href="build/css/app.ios.css" rel="stylesheet">
   <link md-href="build/css/app.md.css" rel="stylesheet">
@@ -14,13 +15,12 @@
 
 <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script></head>
 <body>
-
+  <script src="cordova.js"></script>
   <!-- this Ionic's root component and where the app will load -->
   <ion-app></ion-app>
 
   <!-- cordova.js required for cordova apps -->
   <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client... -->
-  <script src="cordova.js"></script>
   <!-- Polyfill needed for platforms without Promise and Collection support -->
   <script src="build/js/es6-shim.min.js"></script>
   <!-- Zone.js and Reflect-metadata  -->

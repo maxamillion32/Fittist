@@ -32,7 +32,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
     });
-    
   }
 
   ngAfterViewInit() {
@@ -44,8 +43,10 @@ export class MyApp {
     this.af.auth.subscribe(auth => {
       if (auth) {
         this.rootPage = TabsPage;
+        console.log('Facebook?', auth);
       } else {
         this.rootPage = LoginPage;
+        console.log('Login', auth);
       }
      }); 
    }

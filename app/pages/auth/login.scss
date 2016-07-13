@@ -1,53 +1,38 @@
-.login {
+.login-page {
+	background: map-get($colors , background);
 	text-align: center;
-	margin-top: 100px;
-	background: rgba(255,255,255,0.8);
-	border-radius: 5px 5px;
-	margin-left: 10px;
-	margin-right: 10px;
-	overflow: hidden;
-  /* -webkit-filter: blur(2px);
-  -moz-filter: blur(2px);
-  -o-filter: blur(2px);
-  -ms-filter: blur(2px);
-  filter: blur(2px); */
-  box-shadow: 0px 3px 3px 1px rgba(0,0,0,0.5)
-}
-.title {
-	color: #696969;
-}
-.username {
-	border-radius: 5px 5px 0px 0px;
-}
-.password {
-	border-radius: 0px 0px 5px 5px;
-}
 
-.createAccount {
-	text-align: center;
-	margin-top: 100px;
-	background: rgba(255,255,255,0.8);
-	border-radius: 5px 5px;
-	margin-left: 10px;
-	margin-right: 10px;
-}
+	.title {
+		font-size: 3em;
+		padding-top: 100px;
+		color: map-get($colors, primary);
+	}
+	.button {
+		font-size: 1.2em;
+		width: 250px;
+		height: 60px;
+		padding: 10px;
+		.buttonIcon {
+			float: left;
+		}
+	}
+	.facebook {
+		position: absolute;
+		width: 100%;
+		bottom: 120px;
+		.button {
+			background-color: #3b5998;
+			border: 2px solid #3b5998;
 
-.content:before {
-  content: "";
-  position: fixed;
-  left: 0;
-  right: 0;
-  z-index: -1;
-  
-  display: block;
-  background: url('../../img/cropped-jordan-comp.png') no-repeat fixed center;
-  background-size: 200% auto;
-  width: 100%;
-  height: 100%;
-}
-.content {
-  position: fixed;
-  left: 0;
-  right: 0;
-  z-index: 0;
+		}
+	}
+	.email {
+		position: absolute;
+		width: 100%;
+		bottom: 50px;
+		.button {
+			background-color: map-get($colors, primary);
+			border: 2px solid map-get($colors, primary);
+		}
+	}
 }
