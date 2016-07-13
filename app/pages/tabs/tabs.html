@@ -1,4 +1,4 @@
-<div style="z-index: 999;">
+<!-- <div style="z-index: 999;">
 	<div *ngIf="showMenu">
 		<div class="option-label">
 			<label class="label">Add Workout</label>
@@ -10,11 +10,11 @@
 	<button fab fab-right class="floating-action" (click)="addMenu()">
 		<ion-icon name="add"></ion-icon>
 	</button>
-</div>
+</div> Removing FAB For now-->
 <ion-tabs>
   <ion-tab [root]="tab1Root" id="Home" tabIcon="pulse"></ion-tab>
-  <ion-tab [root]="tab2Root" id="Workouts" tabIcon="medal"></ion-tab>
-  <ion-tab [root]="tab3Root" id="Team" tabIcon="people"></ion-tab>
+  <ion-tab [root]="tab2Root" id="Workouts" tabIcon="search"></ion-tab>
+  <ion-tab [root]="tab3Root" id="Team" tabIcon="calendar"></ion-tab>
   <ion-tab [root]="tab4Root" id="Movements" tabIcon="walk"></ion-tab>
   <ion-tab [root]="tab5Root" id="Me" tabIcon="person"></ion-tab>
 </ion-tabs>

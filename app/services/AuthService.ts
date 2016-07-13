@@ -31,7 +31,7 @@ export class AuthService {
 
     loginWithFacebook() {
 
-        Facebook.login(['email','public_profile','user_friends']).then(response => {
+        return Facebook.login(['email', 'public_profile', 'user_friends']).then(response => {
             console.log('Response: ' + JSON.stringify(response));
 
             let creds = firebase.auth.FacebookAuthProvider
@@ -45,25 +45,22 @@ export class AuthService {
                 provider: AuthProviders.Facebook,
                 method: AuthMethods.OAuthToken,
                 remember: 'default',
-                scope: ['public_profile','email','user_friends']
+                scope: ['public_profile', 'email', 'user_friends']
             }
 
-            this.af.auth.login(creds , providerConfig)
-                .then( (authData) => {
+            this.af.auth.login(creds, providerConfig)
+                .then((authData) => {
                     /* Check if user exists, if not add user to database */
                     this.addUser(authData);
                     console.log("Firebase Success: " + JSON.stringify(authData));
-                    
-                }).catch(error => {
-                    console.warn('Error ' + JSON.stringify(error));
-                    throw error;
+
                 });
 
-        }).catch( error => {
-            console.warn('Facebook Error: ' +  JSON.stringify(error));
+        }).catch(error => {
+            console.warn('Facebook Error: ' + JSON.stringify(error));
             throw error;
-            
-        })
+
+        });
 
     }
 

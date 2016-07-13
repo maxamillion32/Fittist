@@ -21,3 +21,10 @@
 	text-align: center;
 	right: 72px;
 }
+ion-tabbar {
+	background: map-get($colors, primary);
+	border-top: 0px;
+}
+.tab-button[aria-selected=true]{
+	color: white;
+}

@@ -17,8 +17,7 @@ export class LoginPage {
                 private athletes: AthleteService,
                 public af: AngularFire) {}
 
-    login( credentials, _event) {
-        _event.preventDefault();
+    login( credentials) {
 
         this.authService.passwordLogin(credentials)
         .then(success => {
@@ -26,6 +25,11 @@ export class LoginPage {
         }).catch(error => {
             console.warn('Login Error', error);
         });
+    }
+
+    emailLogin() {
+        let credentials = { 'email': 'andrew3@gmail.com', password: 'andrew' };
+        this.login(credentials);
     }
 
     registerUser(credentials, _event) {
@@ -52,8 +56,8 @@ export class LoginPage {
     }
 
     facebookLogin() {
-        this.authService.loginWithFacebook().then(result => {
-            console.log('Redirect Result: ', result);
+        this.authService.loginWithFacebook().catch(error => {
+            this.error = error;
         });
     }
 
