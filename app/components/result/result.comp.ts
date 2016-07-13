@@ -37,7 +37,6 @@ export class ResultComponent implements OnInit{
 		}); */
 		this.athlete = this.athletes.getAthlete(this.result.athleteId);
 		this.athlete.subscribe( data => {
-			console.log('athlete data, ', data, data.photoURL);
 			this.photoURL = data.photoURL;
 		})
 	}

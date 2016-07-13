@@ -1,22 +1,19 @@
-<ion-card class="workout-card">
-	<ion-row>
-		<ion-col>
-			<button clear small (click)="like($event, property)">
-				<ion-icon name="thumbs-up"></ion-icon>
-				Like
-			</button>
-		</ion-col>
-		<ion-col>
-			<button clear small (click)="favorite($event, property)">
-				<ion-icon name="star"></ion-icon>
-				Favorite
-			</button>
-		</ion-col>
-		<ion-col>
-			<button clear small (click)="addResult($event, property)">
-				<ion-icon name="ion-plus"></ion-icon>
-				Add Result
-			</button>
-		</ion-col>
-	</ion-row>
-</ion-card>
+<div class="workout-comp">
+	<div class="workout-title">
+		Workout
+	</div>
+	<div class="workout-main">
+		<div class="workout-summary">
+			<div class="workout-picture">
+				<img [src]="workoutPhotoURL">
+			</div>
+			<div class="workout-details">
+				<div class="name">{{(workout | async)?.name}}</div>
+				<div class="creator">@{{(workout | async)?.createdBy}}</div>
+			</div>
+		</div>
+		<div class="workout-time">
+			{{(workout | async)?.resultType}}
+		</div>
+	</div>
+</div>

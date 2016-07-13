@@ -26,7 +26,7 @@ export class WorkoutService {
     }
 
     getWorkout(id: string): FirebaseObjectObservable<any> {
-        return this.af.database.object('/workouts/' + id, {preserveSnapshot: true});
+        return this.af.database.object('/workouts/' + id);
     }
 
     addWorkout(workout: Workout): string {
