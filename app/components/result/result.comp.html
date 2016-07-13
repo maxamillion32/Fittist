@@ -1,52 +1,20 @@
-<ion-content>
-
-</ion-content>
-
-<!-- <ion-card class="result-comp">
-	<ion-item *ngIf="athlete">
-		<ion-avatar item-left>
-			<img src="img/molly.jpg" alt="andrew">
-		</ion-avatar>
-		<div>
-		    <h2 class="card-title">
-				{{(athlete | async)?.name}}
-			</h2>
-			<h4>
-				{{(athlete | async)?.team}}
-			</h4>
-			<h4>
-				{{result.completionDate | date}}
-			</h4>  
+<div class="result-comp">
+	<div class="header">
+		<div class="profile">
+			<div class="profile-picture">
+				<img [src]="photoURL">
+			</div>
+			<div class="name">{{(athlete | async)?.name}}</div>
 		</div>
-	</ion-item>
- 	<ion-list inset *ngIf="workout">
-		<ion-item> 
-			<h2>{{workout.name}}</h2>
-			<h2 item-right padding-right> {{result.result}} </h2>
-			<ion-icon item-right name="arrow-down"> </ion-icon> 
-		</ion-item>
-			<div *ngFor="let exercises of workout.exercises">
-				<exercise [exercise]="exercises"></exercise>
-			</div> 
-	</ion-list> 
-	<ion-row>
-		<ion-col>
-			<button clear small (click)="like($event, property)">
-				<ion-icon name="thumbs-up"></ion-icon>
-				Like
-			</button>
-		</ion-col>
-		<ion-col>
-			<button clear small (click)="favorite($event, property)">
-				<ion-icon name="star"></ion-icon>
-				Favorite
-			</button>
-		</ion-col>
-		<ion-col>
-			<button clear small (click)="addResult($event, workout)">
-				<ion-icon name="plus"></ion-icon>
-				Add Result
-			</button>
-		</ion-col>
-	</ion-row>
-</ion-card> -->
+		<div class="date">
+			{{result.completionDate | date}}
+		</div>
+	</div>
+	<div class="comment" *ngIf="result.comment">
+		{{result.comment}}
+	</div>
+	<div *ngIf="result.photoURL" class="result-photo">
+		<img [src]="result.photoURL">
+	</div>
+	<workout [workout]="result.workoutId"></workout>
+</div>	

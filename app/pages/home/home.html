@@ -1,8 +1,5 @@
-<ion-navbar *navbar>
-  <ion-title>Home</ion-title>
-</ion-navbar>
-<ion-content padding class="home">
-<div *ngFor="let result of resultPipe | async ">
-	<result [result]="result"></result>
-</div>
+<ion-content class="home">
+	<div *ngFor="let result of resultPipe | async ">
+		<result [result]="result"></result>
+	</div>
 </ion-content>

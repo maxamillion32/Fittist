@@ -1,3 +1,37 @@
 .result-comp {
+	.header {
+		height: 40px;
+		width: 100%;
+		background-color: white;
+		padding: 5px;
+		
+		.profile {
+			display: inline-block;
+			height: 30px;
 
+			.profile-picture {
+				display: inline;
+				margin: 0px;
+				padding: 0px;
+				height: 30px;
+				line-height: 30px;
+				img { 
+					vertical-align: middle;
+					width: 30px;
+					height: 30px;
+					border-radius: 15px;
+				}
+			}
+			.name {
+				display: inline;
+				padding-bottom: 10px;
+				padding-left: 5px;
+			}
+		}
+		.date {
+			float: right;
+			padding-top: 8px;
+			display: inline-block;
+		}
+	}
 }
